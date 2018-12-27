@@ -19,12 +19,10 @@
 #include <string.h>
 #include <iostream>
 #include <thread>
-#include "BindVarCommand.h"
 
 class ConnectServerCommand : public Command {
 
     void setBuffer(char[]);
-    string getName(char[]);
     static bool hasMessage(char[]);
     static double parseResult(char[], int);
     static bool checkIfBind(char[]);
@@ -32,14 +30,14 @@ class ConnectServerCommand : public Command {
     void strcpy(char*, string);
     static void clearIP(char*, int);
     static bool ifShouldUpdate(char);
+    static bool lookForNone(char*, int);
     Pro* p;
 
 public:
     ConnectServerCommand(string line, string name, Pro* p);
     ConnectServerCommand(Pro*);
     string extractWordFromLine(string line);
-    static void connectServer(char*, string, ConnectServerCommand, int);
-    static char* parseIP(string IP);
+    static void connectServer(char*, string, ConnectServerCommand*, int);
     int doCommand();
     void setValue(string, double);
 };

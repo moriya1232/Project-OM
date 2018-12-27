@@ -68,15 +68,6 @@ static bool checkCloseClosure(char c) {
     return false;
 }
 
-static string removeApostrophes(string line) {
-    if ((line[0] != '\"' || line[line.length() - 1] != '\"') &&
-        (line[0] != '\'' || line[line.length() - 1] != '\'')) {
-        throw ("doesn't have any apostrophes!");
-    }
-    line = line.substr(1, line.length() - 2);
-    return line;
-}
-
 static string removeSpacingFromBegin(string line) {
     for(int i=0; line[i] == ' ' || line[i] == '\t' || line[i] == '\b';) {
         line = line.substr(1, line.length()-1);
@@ -96,6 +87,16 @@ static string removeSpaces(string line) {
     line = removeSpacingFromEnd(line);
     return line;
 }
+static string removeApostrophes(string line) {
+    line = removeSpaces(line);
+    if (line[0] == '"' && line[line.length() - 1] == '"') {
+        line = line.substr(1);
+        line = line.substr(0, line.length() - 1);
+    }
+    return line;
+}
+
+
 
 static string removeOpenSpiPar(string line) {
     line = removeSpaces(line);
@@ -112,11 +113,25 @@ static string removeEqual(string line) {
     return line;
 }
 
-
 static string removeParenthesis(string line) {
     line = removeSpaces(line);
+    int counter = 0;
     if (line[0] == '(' && line[line.length()-1] == ')') {
-        line = line.substr(1,line.length()-2);
+        for (int i=1;i<line.length()-1;++i) {
+            char c = line[i];
+            if (c==')') {
+                if (counter==0) {
+                    counter--;
+                    break;
+                } else {
+                    counter--;
+                }
+            } else if (c=='(') {
+                counter++;
+            }
+        } if(counter==0) {
+            line = line.substr(1, line.length() - 2);
+        }
     }
     return line;
 }
@@ -139,7 +154,7 @@ static string extractVar (string line) {
     return forVar;
 }
 static Expression* insertExpressionsToA (BinaryExpression* a, list<string> lis) {
-   // a->setRight(getExpression(lis.pop_back()))
+    // a->setRight(getExpression(lis.pop_back()))
 
 }
 
@@ -164,35 +179,38 @@ static Expression* getExpression(Pro* pro) {
     }
     BinaryExpression* a;
     string temp =pro->getListForExp().front();
-        if (!existNum(temp) && checkIfOperator(temp[0])) {
-            string oper = temp;
-            if (oper == "+") {
-                a = new(nothrow) Plus();
-            } else if (oper == "-") {
-                a = new(nothrow) Minus();
-            } else if (oper == "*") {
-                a = new( nothrow) Multiplication();
-            } else if (oper == "/") {
-                a = new(nothrow) Divide();
-            }
-        } else {
-            if (existNum(temp) && !checkIfLetter(temp[0])) {
-                Number *num = new(nothrow) Number(temp);
-                pro->popFrontExp();
-                return num;
-            } else {
-                Var *var = new (nothrow) Var(temp, pro->getSymbolTable().at(temp));
-                pro->popFrontExp();
-                return var;
-            }
+    if (!existNum(temp) && checkIfOperator(temp[0])) {
+        string oper = temp;
+        if (oper == "+") {
+            a = new(nothrow) Plus();
+        } else if (oper == "-") {
+            a = new(nothrow) Minus();
+        } else if (oper == "*") {
+            a = new( nothrow) Multiplication();
+        } else if (oper == "/") {
+            a = new(nothrow) Divide();
         }
-        pro->popFrontExp();
-        Expression* ex1 = getExpression(pro);
-        a->setRight(ex1);
-        Expression* ex2 = getExpression(pro);
-        a->setLeft(ex2);
-        return a;
+        pro->getCollector()->addItem(a);
+    } else {
+        if (existNum(temp) && !checkIfLetter(temp[0])) {
+            Number *num = new(nothrow) Number(temp);
+            pro->getCollector()->addItem(num);
+            pro->popFrontExp();
+            return num;
+        } else {
+            Var *var = new (nothrow) Var(temp, pro->getSymbolTable()->at(temp));
+            pro->getCollector()->addItem(var);
+            pro->popFrontExp();
+            return var;
+        }
     }
+    pro->popFrontExp();
+    Expression* ex1 = getExpression(pro);
+    a->setRight(ex1);
+    Expression* ex2 = getExpression(pro);
+    a->setLeft(ex2);
+    return a;
+}
 
 static string extractDirectory (string line) {
     char c=line[0];
@@ -220,15 +238,15 @@ static string removeBind (string line) {
     string result="";
     string temp1;
     string temp2;
-for (int i=0; i<line.length()-4;i++){
-    if (c=='b' && line[i+1] == 'i' && line[i+2] == 'n' && line[i+3] == 'd') {
-        temp1 = line.substr(0,i);
-        temp2 = line.substr(i+4,line.length()-1);
-        result = temp1+temp2;
+    for (int i=0; i<line.length()-4;i++){
+        if (c=='b' && line[i+1] == 'i' && line[i+2] == 'n' && line[i+3] == 'd') {
+            temp1 = line.substr(0,i);
+            temp2 = line.substr(i+4,line.length()-1);
+            result = temp1+temp2;
+        }
+        c = line[i];
     }
-    c = line[i];
-}
-return result;
+    return result;
 }
 
 static string extractSecondVar (string line) {
@@ -264,8 +282,13 @@ static Expression* makeExpression(string line, Pro* pro) {
     string forVar = "";
     forVar = extractVar(line);
     Var* var1 = NULL;
-    if(forVar != "") {
-        var1 =  new (nothrow) Var(forVar,pro->getSymbolTable().at(forVar));
+    if(forVar != "" && forVar.length() == line.length()) {
+        if (pro->isVarInSymbolTable(forVar)) {
+            var1 = new(nothrow) Var(forVar, pro->getSymbolTable()->at(forVar));
+            pro->getCollector()->addItem(var1);
+        } else {
+            string directory = pro->getNamesAndDirectories().at(forVar);
+        }
         return var1;
     }
     queue<string> numbers;
@@ -349,12 +372,12 @@ static Expression* makeExpression(string line, Pro* pro) {
             operators.push(s);
         } else if (checkIfLetter(c)) {
             forMinusAndPlus = false;
-            string takeVar = line.substr(indx-1, line.length()-1);
+            string takeVar = line.substr(indx-1, line.length());
             takeVar = extractVar(takeVar);
             if (changeToMinus) {
                 takeVar = "-" + takeVar;
             }
-            //var1 =  new (nothrow) Var(forVar,pro->getSymbolTable().at(takeVar));
+            //var1 =  new (nothrow) Var(forVar,pro->getSymbolTable()->at(takeVar));
             numbers.push(takeVar);
             indx+=takeVar.length()-1;
             changeToMinus = false;
@@ -389,14 +412,13 @@ static Expression* makeExpression(string line, Pro* pro) {
 }*/
 
 static string extractWordFromLine(string line) {
+    line = removeSpaces(line);
     string result = "";
     int i = 0;
     while (line[i] != ' ' && line[i] != '\n' && i < line.length() && line[i] != '\t') {
         result += line[i];
         i++;
     }
-    while(result[0] == ' ')
-        result = result.substr(1);
     return result;
 }
 
@@ -417,8 +439,5 @@ static string extractSign(string line) {
     }
     return sign;
 }
-
-
-
 
 #endif //PROJECT_USEFULLFUNCTION_H

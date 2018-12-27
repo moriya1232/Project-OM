@@ -4,9 +4,9 @@
 
 #include "ConnectServerCommand.h"
 #include <thread>
+#include <mutex>
 
 using namespace std;
-
 
 ConnectServerCommand:: ConnectServerCommand(string line, string name, Pro* p) :Command(line,name) {
     this->p = p;
@@ -42,29 +42,6 @@ string ConnectServerCommand:: extractWordFromLine(string line) {
     return result;
 }
 
-string ConnectServerCommand::getName(char buffer[]) {
-    string currWord = "";
-    unordered_map<string, double> map = this->p->getSymbolTable();
-    bool run = true;
-    int i = 0;
-    while (run) {
-        currWord = "";
-        char c = buffer[i];
-        while (c != '/' && i < this->p->getBufferLength() && c != ' ') {
-            currWord += c;
-            c = buffer[++i];
-        }
-        i++;
-        for(std::unordered_map<string, double>::iterator iter = map.begin(); iter != map.end(); ++iter)
-        {
-            string k =  iter->first;
-            if (currWord == k)
-                return k;
-        }
-    }
-    return  "";
-}
-
 void ConnectServerCommand::setBuffer(char* buffer) {
     int i = 0;
     string origin = this->p->getBuffer();
@@ -82,16 +59,16 @@ bool ConnectServerCommand::hasMessage(char buffer[]) {
     return false;
 }
 
-void ConnectServerCommand:: connectServer(char* IP, string portNumber, ConnectServerCommand csc, int num) {
+void ConnectServerCommand:: connectServer(char* IP, string portNumber, ConnectServerCommand* csc, int num) {
     int sockfd, portno, n;
     struct sockaddr_in serv_addr;
     struct hostent *server;
     char buffer[256] = {'\0'};
     for (int i = 0; i < 256; i++) {
-        if (csc.p->getBuffer()[i] == '\n')
+        if (csc->p->getBuffer()[i] == '\n')
             break;
         else
-            buffer[i] = csc.p->getBuffer()[i];
+            buffer[i] = csc->p->getBuffer()[i];
     }
     portno = stoi(portNumber);
 
@@ -122,7 +99,7 @@ void ConnectServerCommand:: connectServer(char* IP, string portNumber, ConnectSe
     }
     if (hasMessage(buffer)) {
         // now set the buffer
-        csc.setBuffer(buffer);
+        csc->setBuffer(buffer);
         int len = 0;
         while (true) {
             if (buffer[len] == '\0')
@@ -158,9 +135,27 @@ void ConnectServerCommand:: connectServer(char* IP, string portNumber, ConnectSe
         }
         // now buffer has the answer from the sever
         double val = parseResult(buffer, n);
-        csc.p->setCurrVal(val);
+        csc->p->setCurrVal(val);
     }
+    close(sockfd);
 }
+
+bool ConnectServerCommand::lookForNone(char* buffer, int n) {
+    string s = "";
+    int i = 0;
+    char c = buffer[i];
+    while (c != '=' && i < n) {
+        c = buffer[++i];
+    }
+    while (i < n) {
+        c = buffer[++i];
+        if (c - '0' >= 0 && c - '0' < 10) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 bool ConnectServerCommand::ifShouldUpdate(char c) {
     if (c == 'g') {
@@ -186,6 +181,9 @@ bool ConnectServerCommand::haveToUpdate(char* buffer, int length) {
 }
 
 double ConnectServerCommand::parseResult(char* buffer, int length) {
+    if (lookForNone(buffer,length)) {
+        return 0;
+    }
     // check we have to update some Var
     if (haveToUpdate(buffer, length)) {
         double result = 0;
@@ -207,13 +205,19 @@ double ConnectServerCommand::parseResult(char* buffer, int length) {
             negative = true;
             c = buffer[++i];
         }
+        string s;
         // get the result and return it
-        while (run) {
-            result *= 10;
-            result += c - '0';
-            c = buffer[++i];
-            if (i < length && c == '\'') {
-                run = false;
+        while (c!='\'') {
+            s+=c;
+            c=buffer[++i];
+        }
+        try {
+            result = stod(s);
+        } catch (exception e) {
+            try {
+                result = stod(s.substr(0,6));
+            } catch (exception e1){
+                result=0;
             }
         }
         if (negative)
@@ -223,18 +227,8 @@ double ConnectServerCommand::parseResult(char* buffer, int length) {
         return 0;
 }
 
-char* ConnectServerCommand:: parseIP(string IP) {
-    char* result = new (nothrow) char(IP.length());
-    int count = 0;
-    int len = IP.length();
-    while (count < IP.length()) {
-        result[count] = IP[count];
-        count++;
-    }
-    return result;
-}
-
 int ConnectServerCommand:: doCommand(){
+    while (!this->p->getDoConnected()) {}
     string tempLine = this->getLine();
     tempLine = tempLine.substr(extractWordFromLine(tempLine).length() + 1);
     // ip address
@@ -245,12 +239,15 @@ int ConnectServerCommand:: doCommand(){
     tempLine = tempLine.substr(extractWordFromLine(tempLine).length() + 1);
     // port number
     string s2 = extractWordFromLine(tempLine);
+    Expression* a = makeExpression(s2, p);
+    double d = a->calculate();
     if (this->p->getIP() == "" && this->p->getPort() == ""){
         this->p->setIP(s1);
         this->p->setPort(s2);
     }
-    ConnectServerCommand csc = ConnectServerCommand("", "", this->p);
-    char* cc = new char(arr[n]);
+    ConnectServerCommand* csc = new (nothrow) ConnectServerCommand("", "", this->p);
+    char* cc = new char[arr[n]];
+    this->p->getCollector()->addItem(cc);
     strcpy(cc, s1);
-    connectServer(cc, s2, csc, n+1);
+    connectServer(cc, to_string(d), csc, n+1);
 }

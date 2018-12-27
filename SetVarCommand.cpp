@@ -4,68 +4,92 @@
 
 #include "SetVarCommand.h"
 
-
-SetVarCommand:: SetVarCommand(Var* var1, string name, double d, string line, Pro* pro1) :Command(line, name) {
-    this->var = var1;
-    this->newDouble = d;
-    this->pro = pro1;
-
+SetVarCommand:: SetVarCommand(string line, string name, Pro* p) :Command(line, name) {
+    this->p = p;
 }
-SetVarCommand:: SetVarCommand(string v, string name, double d, string line, Pro* pro1) :Command(line, name) {
-    Var* temp = new (nothrow) Var(v,d);
-    this->var = temp;
-    this->newDouble = d;
-    this->pro = pro1;
 
-}
-int SetVarCommand::  doCommand() {
-    string directory = extractDirectory(this->getLine());
-    string secondVar ="";
-    bool isDire;
-    if (directory =="") {
-        isDire = false;
-        secondVar = extractSecondVar(this->getLine());
-    } else {
-        isDire = true;
+string SetVarCommand::getOtherVar(string line) {
+    int i = 0;
+    string s = "";
+    char c = line[i];
+    while (c != '=' && i < line.length()) {
+        c = line[++i];
     }
+    i++;
+    c = line[i];
+    while (i < line.length()) {
+        s += c;
+        c = line[++i];
+    }
+    s = removeSpaces(s);
     if (shouldBind()) {
-        string name = this->var->getName();
-        if (isDire) {
-            pro->addNamesAndDirectory(name, directory);
-            pro->setVarBind(this->var->getName(), directory);
-        } else {
-            pro->setVarBind(this->var->getName(), secondVar);
+        if (s.substr(0, 4) == "bind") {
+            s = s.substr(4);
         }
-        // extract the other name
-        /*string otherName = "";
-        int i = 0;
-        char c = this->getLine()[i];
-        while (c != '=') {
-            c = this->getLine()[++i];
-        }
-        i += 1;
-        while (i < this->getLine().length()) {
-            c = this->getLine()[i];
-            otherName += c;
-            i++;
-        }*/
-        //otherName = removeSpaces(otherName);
-
     }
-    var->setValue(this->pro->getValueFromSimulator(var->getName(), directory));
-    if (isDire) {
-        if (!pro->isVarInSymbolTable(directory)) {
-            pro->addSymbolTable(directory, this->newDouble);
-        } else {
-            if (newDouble != pro->getSymbolTable().at(directory)) {
-                pro->setVar(directory, this->newDouble);
-            }
-        }
-    }/* else {
-        pro->setVar(var->getName(), this->newDouble);
-    }*/
-
+    return s;
 }
+
+string extractName(string line) {
+    int i = 0, count = 0;
+    char c = line[i];
+    while (i < line.length()) {
+        if (c == ' ') {
+            count++;
+        }
+        c = line[++i];
+    }
+    if (count < 2) {
+        return "";
+    }
+    line = line.substr(extractWordFromLine(line).length() + 1);
+    return extractWordFromLine(line);
+}
+
+int SetVarCommand::  doCommand() {
+    //var throttle = bind "/controls/engines/engine/throttle"
+    double value = 0;
+    string varName = extractName(this->getLine());
+    // get the directory
+    string directory = extractDirectory(this->getLine());
+    string otherVar = getOtherVar(this->getLine());
+    otherVar = removeSpaces(otherVar);
+    directory = removeApostrophes(directory);
+    // meaning this var has a directory - FIRST CASE
+    if (directory != "") {
+        if(this->p->isVarInSymbolTable(directory)) {
+            value = this->p->getSymbolTable()->at(directory);
+        } else {
+            value =0;
+        }
+    } else { // meaning there is no directory in the simulator
+        if (this->p->isVarInSymbolTable(otherVar)) { // meaning this Vas is equal to an exsist Var
+            value = this->p->getSymbolTable()->at(otherVar);
+        } else { // meaning this var is equal to an expression
+            value = makeExpression(otherVar, p)->calculate();
+        }
+    }
+    // if this Var isnt in the symbol table, add it
+    if (!this->p->isVarInSymbolTable(varName)) {
+        this->p->addSymbolTable(varName, value);
+    // if the var is already in the symbol table, update its value
+    } else {
+        this->p->setVarInSymbolTable(varName, value);
+    }
+    // if we need tobind this Var, bind it two-ways binding
+    if (shouldBind()) {
+        if (varName == "rpm") {
+            int x  =5;
+        }
+        if (directory != "") {
+            p->addNamesAndDirectory(varName, directory);
+            p->setVarBind(varName, directory);
+        } else {
+            p->setVarBind(varName, otherVar);
+        }
+    }
+}
+
 bool SetVarCommand::shouldBind() {
     string line = this->getLine();
     bool found1 = false, found2 = false;
@@ -73,7 +97,7 @@ bool SetVarCommand::shouldBind() {
     char c = line[i];
     string s = "";
     while (i < line.length()) {
-        while (c != ' ' && c != '/' && c != '"' && c != '=') {
+        while (c != ' ' && c != '/' && c != '"' && c != '=' && c != '\0' && '\\') {
             s += c;
             c = line[++i];
         }

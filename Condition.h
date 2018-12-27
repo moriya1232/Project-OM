@@ -35,7 +35,6 @@ public:
     Condition();
     Condition(string line, Pro* pro);
     bool checkCondition();
-    string extractWordFromLine(string);
 };
 
 #endif //PROJECT_CONDITION_H

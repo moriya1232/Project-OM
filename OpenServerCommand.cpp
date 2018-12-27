@@ -5,33 +5,13 @@
 #include "OpenServerCommand.h"
 using namespace std;
 
-
 OpenServerCommand:: OpenServerCommand(string line, string name, Pro* p) : Command(line,name) {
     this->p = p;
 }
 
-string OpenServerCommand:: extractWordFromLine(string line) {
-    string result = "";
-    int i = 0;
-    while (line[i] != ' ' && line[i] != '\n' && i < line.length()) {
-        result += line[i];
-        i++;
-    }
-    return result;
-}
-
-void OpenServerCommand:: error (char* msg) {
-    perror(msg);
-    exit(1);
-}
-
-int OpenServerCommand:: getLengthOfBuffer(char* buffer) {
-    return sizeof(buffer)/sizeof(char);
-}
-
-void OpenServerCommand:: openServer(string s1, string s2, OpenServerCommand osc) {
+void OpenServerCommand:: openServer(string s1, string s2, OpenServerCommand* osc) {
     int sockfd, newsockfd, portno, clilen;
-    char buffer[256];
+    char buffer[100];
     struct sockaddr_in serv_addr, cli_addr;
     int  n;
 
@@ -72,18 +52,41 @@ void OpenServerCommand:: openServer(string s1, string s2, OpenServerCommand osc)
     }
     while (true) {
         /* If connection is established then start communicating */
-        bzero(buffer, 256);
-        n = read(newsockfd, buffer, 255);
+        bzero(buffer, 100);
+        if (osc->p->getRun()) {
+            continue;
+        }
+        n = read(newsockfd, buffer, 99);
 
         if (n < 0) {
             perror("ERROR reading from socket");
             exit(1);
         }
-
-        list<double> values = osc.p->getValues(buffer);
-        // set values updates all the values, implements the binding idea
-        osc.p->setValues(values);
+        if (osc->p->getEnd() && osc->p->getDoConnected()) {
+            osc->p->addLeftToString();
+        }
+        osc->p->setString(buffer, n);
+        if (dataReceived(buffer, 100)) {
+            osc->p->setDoConnected();
+        }
+        if (osc->p->getEnd() && osc->p->getDoConnected()) {
+            osc->p->updateValues();
+        }
     }
+}
+
+bool OpenServerCommand::dataReceived(char* buffer, int n) {
+    string s = "";
+    int i = 0;
+    char c = buffer[i];
+    while (i < n) {
+        if (c - '0' == 0 || c == '.' || c == '\n' && i < n || '\0' || '\000' ) {
+            c = buffer[++i];
+        } else {
+            return true;
+        }
+    }
+    return false;
 }
 
 static bool checkBuffer(char c1, char c2, char c3) {
@@ -96,11 +99,16 @@ int OpenServerCommand:: doCommand() {
     string lin = this->getLine().substr(extractWordFromLine(this->getLine()).length() + 1);
     // port number
     string s1 = extractWordFromLine(lin);
+    Expression* a1 = makeExpression(s1, p);
+    double d1 = a1->calculate();
     lin = lin.substr(extractWordFromLine(lin).length() + 1);
     // times per second
     string s2 = extractWordFromLine(lin);
-    OpenServerCommand osc = OpenServerCommand("", "", this->p);
-    thread listenToServer(openServer,s1,s2, osc);
+    Expression* a2 = makeExpression(s2, p);
+    double d2 = a2->calculate();
+    OpenServerCommand* osc = new (nothrow) OpenServerCommand("", "", this->p);
+    osc->p->getCollector()->addItem(osc);
+    thread listenToServer(openServer,to_string(d1),to_string(d2), osc);
     listenToServer.detach();
     return 0;
 }

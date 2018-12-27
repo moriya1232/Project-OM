@@ -25,23 +25,19 @@
 #include <pthread.h>
 #include <errno.h>
 #include <ctype.h>
+#include "SleepCommand.h"
 
 using namespace std;
 
 class OpenServerCommand : public Command {
 
     Pro* p;
+    static bool dataReceived(char*, int);
 
 public:
     OpenServerCommand(string line, string name, Pro* p);
 
-    string extractWordFromLine(string line);
-
-    void error (char* msg);
-
-    static int getLengthOfBuffer(char* buffer);
-
-    static void openServer(string s1, string s2, OpenServerCommand);
+    static void openServer(string s1, string s2, OpenServerCommand*);
 
     int doCommand();
 };

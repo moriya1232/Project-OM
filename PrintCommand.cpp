@@ -22,15 +22,25 @@ string PrintCommand:: extractWordFromLine(string line) {
 }
 
 int PrintCommand:: doCommand() {
+    bool isParam = false;
     string tempLine = this->getLine();
+    //remove "print"
     tempLine = tempLine.substr(extractWordFromLine(tempLine).length() + 1);
     tempLine = removeSpaces(tempLine);
-    string var = extractWordFromLine(tempLine);
-    if (var[0]=='"' && var[var.length()-1=='"']) {
-        cout << removeApostrophes(var) << endl;
+    string var = extractDirectory(tempLine);
+    if (var =="") {
+        isParam = true;
+        var = extractWordFromLine(tempLine);
+    }
+    if (isParam) {
+        //string directory = this->p->getNamesAndDirectories().at(var);
+        // double val = this->p->getValueFromSimulator(directory);
+        double val2 = this->p->getSymbolTable()->at(var);
+        // cout << "simulator:" << var << " " << val << endl;
+        cout << var << " " << val2 << endl;
     } else {
-        double val = this->p->getSymbolTable().at(var);
-        cout << var << " " << val << endl;
+        var = removeApostrophes(var);
+        cout << var << endl;
     }
     return 0;
 }

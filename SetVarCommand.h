@@ -14,13 +14,12 @@
 #include "Pro.h"
 
 class SetVarCommand : public Command {
-    Var *var;
-    double newDouble;
-    Pro* pro;
+    Pro* p;
     bool shouldBind();
+    string getOtherVar(string);
+    string extratName(string);
 public:
-    SetVarCommand(Var* var1, string name, double d, string line, Pro* pro1);
-    SetVarCommand(string v, string name, double d, string line, Pro* pro1);
+    SetVarCommand(string, string, Pro*);
     int doCommand();
 };
 

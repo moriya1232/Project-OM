@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project_another_copy"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project_another_copy">
+				<Option output="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug/Project_another_copy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/moriya/CLionProjects/Pnew11/Project (another copy)/."/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_another_copy"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project_another_copy/fast">
+				<Option output="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug/Project_another_copy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/moriya/CLionProjects/Pnew11/Project (another copy)/."/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_another_copy/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/moriya/CLionProjects/Pnew11/Project\ (another\ copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/BinaryExpression.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/BinaryExpression.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/CMakeLists.txt">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Collector.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Collector.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Command.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Command.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Condition.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Condition.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/ConnectServerCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/ConnectServerCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Divide.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Divide.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/EndCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/EndCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Enterc.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Enterc.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Expression.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Expression.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/IfCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/IfCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/LoopCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/LoopCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Minus.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Minus.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Multiplication.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Multiplication.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Number.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Number.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/OpenServerCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/OpenServerCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Plus.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Plus.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/PrintCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/PrintCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Pro.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Pro.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/SetVarCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/SetVarCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/SleepCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/SleepCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/UnaryExpression.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/UnaryExpression.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/UpdateCommand.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/UpdateCommand.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/UsefulFunctions.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Var.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/Var.h">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/cmake-build-debug/Test.txt">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/main.cpp">
+			<Option target="Project_another_copy"/>
+		</Unit>
+		<Unit filename="/home/moriya/CLionProjects/Pnew11/Project (another copy)/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

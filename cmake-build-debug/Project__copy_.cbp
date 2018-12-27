@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project__copy_"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project__copy_">
+				<Option output="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Project__copy_" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/omer/Desktop/Save/Project (copy)/."/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project__copy_"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project__copy_/fast">
+				<Option output="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Project__copy_" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/omer/Desktop/Save/Project (copy)/."/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project__copy_/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Save/Project\ (copy)/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/BinaryExpression.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/BinaryExpression.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/BindVarCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/BindVarCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/CMakeLists.txt">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Command.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Command.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Condition.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Condition.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/ConnectServerCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/ConnectServerCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/DataReaderServer.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Divide.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Divide.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/EndCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/EndCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/EndLoopCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/EndLoopCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Expression.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Expression.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/GenericExpression.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/GenericExpression.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/IfCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/IfCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/LoopCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/LoopCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Minus.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Minus.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Multiplication.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Multiplication.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Number.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Number.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/OpenServerCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/OpenServerCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Plus.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Plus.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/PrintCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/PrintCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Pro.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Pro.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/SetVarCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/SetVarCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Test.txt">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/UnaryExpression.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/UnaryExpression.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/UpdateCommand.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/UpdateCommand.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/UsefulFunctions.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Var.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/Var.h">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/CMakeCache.txt">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Makefile">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Project">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Project.cbp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Project__copy_">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Project__copy_.cbp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/Test.txt">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/cmake-build-debug/cmake_install.cmake">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/main.cpp">
+			<Option target="Project__copy_"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Save/Project (copy)/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

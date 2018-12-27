@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/omer/Desktop/Project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/omer/Desktop/Project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project">
+				<Option output="/home/omer/Desktop/Project/cmake-build-debug/Project" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/omer/Desktop/Project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/omer/Desktop/Project/."/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Project/fast">
+				<Option output="/home/omer/Desktop/Project/cmake-build-debug/Project" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/omer/Desktop/Project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/omer/Desktop/Project/."/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/omer/Desktop/Project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/omer/Desktop/Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/omer/Desktop/Project/BinaryExpression.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/BinaryExpression.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/BindVarCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/BindVarCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/CMakeLists.txt">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Command.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Command.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Condition.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Condition.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/ConnectServerCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/ConnectServerCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/DataReaderServer.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Divide.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Divide.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/EndLoopCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/EndLoopCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Expression.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Expression.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/GenericExpression.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/GenericExpression.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/IfCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/IfCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/LoopCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/LoopCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Minus.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Minus.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Multiplication.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Multiplication.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Number.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Number.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/OpenServerCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/OpenServerCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Plus.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Plus.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/PrintCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/PrintCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Pro.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Pro.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/SetVarCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/SetVarCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/UnaryExpression.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/UnaryExpression.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/UpdateCommand.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/UpdateCommand.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/UsefulFunctions.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Var.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/Var.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/cmake-build-debug/CMakeCache.txt">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/cmake-build-debug/Makefile">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/cmake-build-debug/Project.cbp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/cmake-build-debug/Test.txt">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/cmake-build-debug/cmake_install.cmake">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/main.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="/home/omer/Desktop/Project/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

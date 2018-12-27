@@ -1,0 +1,154 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/omer/Desktop/Project (another copy)/BinaryExpression.h
+Expression.h
+/home/omer/Desktop/Project (another copy)/Expression.h
+
+/home/omer/Desktop/Project (another copy)/Collector.cpp
+Collector.h
+/home/omer/Desktop/Project (another copy)/Collector.h
+
+/home/omer/Desktop/Project (another copy)/Collector.h
+string
+-
+list
+-
+
+/home/omer/Desktop/Project (another copy)/Command.h
+map
+-
+list
+-
+string
+-
+UsefulFunctions.h
+/home/omer/Desktop/Project (another copy)/UsefulFunctions.h
+Pro.h
+/home/omer/Desktop/Project (another copy)/Pro.h
+
+/home/omer/Desktop/Project (another copy)/ConnectServerCommand.h
+Command.h
+/home/omer/Desktop/Project (another copy)/Command.h
+stdio.h
+-
+stdlib.h
+-
+netdb.h
+-
+sys/socket.h
+-
+unistd.h
+-
+netinet/in.h
+-
+string.h
+-
+iostream
+-
+thread
+-
+
+/home/omer/Desktop/Project (another copy)/Divide.h
+BinaryExpression.h
+/home/omer/Desktop/Project (another copy)/BinaryExpression.h
+Expression.h
+/home/omer/Desktop/Project (another copy)/Expression.h
+
+/home/omer/Desktop/Project (another copy)/Expression.h
+queue
+-
+stack
+-
+list
+-
+iostream
+/home/omer/Desktop/Project (another copy)/iostream
+string
+-
+Pro.h
+/home/omer/Desktop/Project (another copy)/Pro.h
+
+/home/omer/Desktop/Project (another copy)/Minus.h
+BinaryExpression.h
+/home/omer/Desktop/Project (another copy)/BinaryExpression.h
+Expression.h
+/home/omer/Desktop/Project (another copy)/Expression.h
+
+/home/omer/Desktop/Project (another copy)/Multiplication.h
+BinaryExpression.h
+/home/omer/Desktop/Project (another copy)/BinaryExpression.h
+Expression.h
+/home/omer/Desktop/Project (another copy)/Expression.h
+
+/home/omer/Desktop/Project (another copy)/Number.h
+UnaryExpression.h
+/home/omer/Desktop/Project (another copy)/UnaryExpression.h
+
+/home/omer/Desktop/Project (another copy)/Plus.h
+BinaryExpression.h
+/home/omer/Desktop/Project (another copy)/BinaryExpression.h
+Expression.h
+/home/omer/Desktop/Project (another copy)/Expression.h
+
+/home/omer/Desktop/Project (another copy)/Pro.cpp
+Pro.h
+/home/omer/Desktop/Project (another copy)/Pro.h
+string
+-
+ConnectServerCommand.h
+/home/omer/Desktop/Project (another copy)/ConnectServerCommand.h
+
+/home/omer/Desktop/Project (another copy)/Pro.h
+string
+-
+unordered_map
+/home/omer/Desktop/Project (another copy)/unordered_map
+sys/types.h
+-
+sys/socket.h
+-
+netinet/in.h
+-
+list
+-
+mutex
+-
+Collector.h
+/home/omer/Desktop/Project (another copy)/Collector.h
+
+/home/omer/Desktop/Project (another copy)/UnaryExpression.h
+Expression.h
+/home/omer/Desktop/Project (another copy)/Expression.h
+string
+-
+
+/home/omer/Desktop/Project (another copy)/UsefulFunctions.h
+Expression.h
+/home/omer/Desktop/Project (another copy)/Expression.h
+Number.h
+/home/omer/Desktop/Project (another copy)/Number.h
+Divide.h
+/home/omer/Desktop/Project (another copy)/Divide.h
+Multiplication.h
+/home/omer/Desktop/Project (another copy)/Multiplication.h
+Minus.h
+/home/omer/Desktop/Project (another copy)/Minus.h
+Plus.h
+/home/omer/Desktop/Project (another copy)/Plus.h
+Var.h
+/home/omer/Desktop/Project (another copy)/Var.h
+regex
+-
+
+/home/omer/Desktop/Project (another copy)/Var.h
+string
+-
+UnaryExpression.h
+/home/omer/Desktop/Project (another copy)/UnaryExpression.h
+

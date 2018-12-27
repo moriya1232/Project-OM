@@ -1,0 +1,3 @@
+/home/omer/Desktop/Project (another copy)/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/omer/Desktop/Project (another copy)/cmake-build-debug/CMakeFiles/Project__another_copy_.dir
+/home/omer/Desktop/Project (another copy)/cmake-build-debug/CMakeFiles/edit_cache.dir

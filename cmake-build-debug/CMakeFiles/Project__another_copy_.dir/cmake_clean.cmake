@@ -1,0 +1,34 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Project__another_copy_.dir/BinaryExpression.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Collector.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Command.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Condition.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/ConnectServerCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Divide.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/EndCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Enterc.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Expression.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/ExitCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/IfCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/LoopCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/main.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Minus.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Multiplication.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Number.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/OpenServerCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Plus.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/PrintCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Pro.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/SetVarCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/SleepCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/UnaryExpression.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/UpdateCommand.cpp.o"
+  "CMakeFiles/Project__another_copy_.dir/Var.cpp.o"
+  "Project__another_copy_.pdb"
+  "Project__another_copy_"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Project__another_copy_.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
