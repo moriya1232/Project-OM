@@ -41,7 +41,7 @@ using namespace std;
         } else {
             this->p->setVarInSymbolTable(var, val);
         }
-        if (this->p->isVarBinded(var)) {
+        if (this->p->ifVarBinded(var)) {
             list<string> bv = this->p->getBindMap().at(var);
             this->p->updateBindedVars(bv, val);
         }

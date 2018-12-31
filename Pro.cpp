@@ -7,6 +7,12 @@
 #include "ConnectServerCommand.h"
 using namespace std;
 
+mutex m;
+
+/**
+ * this function is a constractor
+ * @param map  - the symbol table.
+ */
 Pro:: Pro(unordered_map<string,double>* map) {
     this->symbolTable = map;
     setSymbolTable();
@@ -32,83 +38,73 @@ Pro:: Pro(unordered_map<string,double>* map) {
     directoryOfChanged = "";
     this->protectData = false;
     this->protectedName = "";
+    this->doConnected = false;
     this->protectedDirectory = "";
     this->updateList = false;
-    need1 = "";
-    need2 = 0;
     this->updateCommandIsRunning = false;
 }
 
+/**
+ * create the collector for all the objects
+ */
 void Pro::createCollector(){
     Collector* c = new (nothrow) Collector();
     this->collector = c;
 }
 
-list<double> Pro::getValues(char* buffer) {
-    list<double> result;
-    bool run = true;
-    string s = "";
-    int i = 0;
-    char c = buffer[i];
-    while (run) {
-        if (c == '\n') {
-            run = false;
-        }
-        while (c != ',' && run) {
-            s += c;
-            c = buffer[++i];
-            if (c == '\n') {
-                run = false;
-            }
-        }
-        double d = stod(s);
-        result.push_back((d));
-        c = buffer[++i];
-        s = "";
-    }
-    return result;
-}
-
+/**
+ * returns the run mode (if we have received any data from the simulator)
+ * @return true of false
+ */
 bool Pro::getRun() {
     return this->updateCommandIsRunning;
 }
 
+/**
+ * sets the fun mode to the given bool
+ * @param b the given bool
+ */
 void Pro::setRun(bool b) {
     this->updateCommandIsRunning = b;
 }
 
-void Pro::setNeed1(string s) {
-    this->need1 = s;
-}
-
-string Pro::getNeed1() {
-    return this->need1;
-}
-
-void Pro::setNeed2(double d) {
-    this->need2 = d;
-}
-
-double Pro::getNeed2() {
-    return this->need2;
-}
-
+/**
+ * reutrn if we have a data to protect
+ * @return true or false
+ */
 bool Pro::getProtectedData() {
     return this->protectData;
 }
 
+/**
+ * sets the protected data mode
+ * @param b
+ */
 void Pro::setProtectedData(bool b) {
     this->protectData = b;
 }
 
+/**
+ * set the changed mode
+ * @param b the given mode
+ */
 void Pro::setChanged(bool b) {
     this->changed = b;
 }
 
+/**
+ * sets the directory of the changed var
+ * @param s is the directory
+ */
 void Pro::setDirectoryOfChanged(string s) {
     this->directoryOfChanged = s;
 }
 
+/**
+ * returns the indx of a given var name
+ * @param s is the var name
+ * @return the index
+ */
 int Pro::getIndx(string s) {
     int count = 0;
     for (list<string>::iterator it = lines.begin(); it != lines.end(); it++) {
@@ -121,30 +117,54 @@ int Pro::getIndx(string s) {
     return -1;
 }
 
+/**
+ * sets a list of tempruary values
+ * @param lis is the list
+ */
 void Pro::setTempValues(list<double> lis) {
     this->tempValues = lis;
 }
 
+/**
+ * a distructor for pro
+ */
 Pro::~Pro() {
-    delete(symbolTable);
     delete this->collector;
     delete this->collectorCommands;
 }
 
+/**
+ * sets the leftover data from the simulator into the current string
+ * @param buffer is the leftovers
+ * @param indx starting index
+ * @param n end index
+ */
 void Pro::setLeft(char* buffer, int indx, int n) {
     for (int i = indx; i < n; i++) {
         this->left += buffer[i];
     }
 }
 
+/**
+ * returns true or false for indicate the program if we saw a \n already
+ * @return
+ */
 bool Pro::getEnd() {
     return this->hasEnd;
 }
 
+/**
+ * returns the list of the temp values
+ * @return
+ */
 list<double> Pro::getTempValues() {
     return this->tempValues;
 }
 
+/**
+ * creats a list of doubles according to the tenp values list
+ * @return
+ */
 list<double> Pro::makeList() {
     list<double> values;
     if(this->ip == "" || this->port == "") {
@@ -177,6 +197,10 @@ list<double> Pro::makeList() {
     return values;
 }
 
+/**
+ * this functio updates the symbol table according to the given data
+ * from the simulator
+ */
 void Pro::updateValues() {
     unordered_map<string, double> tempMap = *symbolTable;
     bool changeValue = false;
@@ -222,13 +246,16 @@ void Pro::updateValues() {
         } else {
             setVarInSymbolTable(tempString, *itVal);
         }
-        if (isVarBinded(tempString)) {
+        if (ifVarBinded(tempString)) {
             list<string> bv = this->bindMap.at(tempString);
             updateBindedVars(bv, *itVal);
         }
     }
 }
 
+/**
+ * updates the simulator values
+ */
 void Pro::updateServer() {
     if (this->port != "") {
         for (list<string>::iterator it = lines.begin(); it != lines.end(); it++) {
@@ -239,25 +266,48 @@ void Pro::updateServer() {
     return;
 }
 
+/**
+ * no in use.
+ * @return
+ */
 bool Pro::getUpdateList() {
     return this->updateList;
 }
 
 
-
+/**
+ * this function compares the values (first and second) of two given maps
+ * @param m is the first map
+ * @param s is the sceond
+ * @return true or false
+ */
 bool Pro::compareMaps(unordered_map<string, double> m, string s) {
     if (symbolTable->at(s) != m.at(s))
         return false;
     return true;
 }
 
+/**
+ * returns the collector which is responsible of releasing allocated memory
+ * @return the collector
+ */
 Collector* Pro::getCollector() {
     return this->collector;
 }
+/**
+ * retunrs the collector which is responsible of releasing allocated memory
+ * in loops
+ * @return the collector
+ */
 Collector* Pro::getCollectorCommands() {
     return this->collectorCommands;
 }
 
+/**
+ * sets the given data in pro
+ * @param buffer if the given daya
+ * @param n the data's length
+ */
 void Pro::setString (char* buffer, int n) {
     int indx = -1;
     // check whether the buffer includes \n
@@ -279,15 +329,11 @@ void Pro::setString (char* buffer, int n) {
     }
 }
 
-bool Pro::isVarBinded(string vn) {
-    try {
-        list<string> tempList = bindMap.at(vn);
-        return true;
-    } catch (exception e) {
-        return false;
-    }
-}
-
+/**
+ * return true if the given var is in the symbol table, otherwise false
+ * @param vn is the given var
+ * @return true or false
+ */
 bool Pro::isVarInSymbolTable(string vn) {
     try {
         double tempVal = this->symbolTable->at(vn);
@@ -297,6 +343,11 @@ bool Pro::isVarInSymbolTable(string vn) {
     }
 }
 
+/**
+ * returns the name by a given directory
+ * @param direct the directory
+ * @return the name
+ */
 string Pro::getNameByDirectory(string direct) {
     unordered_map<string,string> m = this->namesAndDirectory;
     for (unordered_map<string,string>::iterator it = m.begin(); it != m.end(); it++) {
@@ -308,7 +359,12 @@ string Pro::getNameByDirectory(string direct) {
     return "";
 }
 
-// returns true if the lists are equal
+/**
+ * receives two lists of double and return true if they equal, otherwise false
+ * @param l1
+ * @param l2
+ * @return
+ */
 bool Pro::compareLists(list<double> l1, list<double> l2) {
     if (l1.empty()) {
         return false;
@@ -323,6 +379,9 @@ bool Pro::compareLists(list<double> l1, list<double> l2) {
     return true;
 }
 
+/**
+ * sets the pathes if the xml in the symbol table
+ */
 void Pro:: setSymbolTable() {
     symbolTable->insert(make_pair("/instrumentation/airspeed-indicator/indicated-speed-kt", 0));
     symbolTable->insert(make_pair("/instrumentation/altimeter/indicated-altitude-ft", 0));
@@ -336,8 +395,8 @@ void Pro:: setSymbolTable() {
     symbolTable->insert(make_pair("/instrumentation/gps/indicated-altitude-ft", 0));
     symbolTable->insert(make_pair("/instrumentation/gps/indicated-ground-speed-kt", 0));
     symbolTable->insert(make_pair("/instrumentation/gps/indicated-vertical-speed", 0));
-    symbolTable->insert(make_pair("/instrumentation/heading-indicator/offset-deg", 0));
-    symbolTable->insert(make_pair("/instrumentation/magnetic-compass/indicated-heading-deg", 0));
+    symbolTable->insert(make_pair("/instrumentation/heading-indicator/indicated-heading-deg", 0));
+    symbolTable->insert(make_pair("/instrumentation/magnetic-compass/offset-deg", 0));
     symbolTable->insert(make_pair("/instrumentation/slip-skid-ball/indicated-slip-skid", 0));
     symbolTable->insert(make_pair("/instrumentation/turn-indicator/indicated-turn-rate", 0));
     symbolTable->insert(make_pair("/instrumentation/vertical-speed-indicator/indicated-speed-fpm", 0));
@@ -349,7 +408,9 @@ void Pro:: setSymbolTable() {
     symbolTable->insert(make_pair("/engines/engine/rpm", 0));
 }
 
-
+/**
+ * sets the pathes of the xml in the lines list
+ */
 void Pro:: setLines(){
     this->lines.push_back("/instrumentation/airspeed-indicator/indicated-speed-kt");
     this->lines.push_back("/instrumentation/altimeter/indicated-altitude-ft");
@@ -363,8 +424,8 @@ void Pro:: setLines(){
     this->lines.push_back("/instrumentation/gps/indicated-altitude-ft");
     this->lines.push_back("/instrumentation/gps/indicated-ground-speed-kt");
     this->lines.push_back("/instrumentation/gps/indicated-vertical-speed");
-    this->lines.push_back("/instrumentation/heading-indicator/offset-deg");
-    this->lines.push_back("/instrumentation/magnetic-compass/indicated-heading-deg");
+    this->lines.push_back("/instrumentation/heading-indicator/indicated-heading-deg");
+    this->lines.push_back("/instrumentation/magnetic-compass/offset-deg");
     this->lines.push_back("/instrumentation/slip-skid-ball/indicated-slip-skid");
     this->lines.push_back("/instrumentation/turn-indicator/indicated-turn-rate");
     this->lines.push_back("/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
@@ -377,6 +438,11 @@ void Pro:: setLines(){
 
 }
 
+/**
+ * return true is the given var is in the symbol table
+ * @param vn is the given var
+ * @return true or false
+ */
 bool Pro::isExsistInSymbolTable(string vn) {
     try {
         this->symbolTable->at(vn);
@@ -386,50 +452,50 @@ bool Pro::isExsistInSymbolTable(string vn) {
     }
 }
 
+/**
+ * sets the curr val
+ * @param d the new curr val
+ */
 void Pro::setCurrVal(double d) {
     this->currVal = d;
 }
 
+/**
+ * sets the protected directory
+ * @param s the protected directory
+ */
 void Pro::setProtectedDirectory(string s) {
     this->protectedDirectory = s;
 }
 
+/**
+ * sets the protected name
+ * @param s the protected name
+ */
 void Pro::setProtectedName(string s) {
     this->protectedName = s;
 }
 
+/**
+ * updates the list by the given value
+ * @param bv the list
+ * @param val the given value
+ */
 void Pro::updateBindedVars(list<string> bv, double val) {
-    list<string> bv2;
-    double currVal;
-    int count = 0;
-    for (list<string>::iterator it = bv.begin(); it != bv.end() && count < bv.size(); it++, count++) {
+    for (list<string>::iterator it = bv.begin(); it != bv.end(); it++) {
         string currName = *it;
-        // if this name is actual a directory
-        if (currName[0] == '/') {
-            if (isVarInSymbolTable(currName) && symbolTable->at(currName) == val) {
-                continue;
-            }
-            setVarInSymbolTable(currName, val);
-            // if the values are equal, continue
+        setVarInSymbolTable(currName, val);
+        if(currName[0]=='/') {
             setValueInSimulator(currName, val);
-            bv2 = this->bindMap.at(currName);
-            //updateBindedVars(bv2, val);
-        }
-        // if this name is a real name, meaning not a directory
-        if (isVarInSymbolTable(currName)) {
-            currVal = symbolTable->at(currName);
-            // if the value is already updated
-            if (currVal == val) {
-                continue;
-            } else {
-                setVarInSymbolTable(currName, val);
-                bv2 = this->bindMap.at(currName);
-                //updateBindedVars(bv2, val);
-            }
-        }
         }
     }
+}
 
+/**
+ * returns true if the given var has a directory
+ * @param vn the given ar
+ * @return true of false
+ */
 bool Pro::hasDirectory(string vn) {
     try {
         this->namesAndDirectory.at(vn);
@@ -439,6 +505,12 @@ bool Pro::hasDirectory(string vn) {
     }
 }
 
+/**
+ * this function sets a var, by a given name and value
+ * @param vn the name
+ * @param newValue the value
+ * @return int
+ */
 int Pro::setVar(string vn, double newValue) {
     int prev = symbolTable->at(vn);
     // if this var has a directory, update it
@@ -449,7 +521,7 @@ int Pro::setVar(string vn, double newValue) {
         this->needToUpdate = newValue;
         this->directoryToUpdate = directory;
         // if someone is binded to var, update him aswell
-        if (isVarBinded(vn)) {
+        if (ifVarBinded(vn)) {
             list<string> bv = this->bindMap.at(vn);
             this->updateCommandIsRunning = false;
             updateBindedVars(bv, newValue);
@@ -460,7 +532,7 @@ int Pro::setVar(string vn, double newValue) {
         this->protectedDirectory = vn;
         setValueInSimulator(vn, newValue);
         // if someone is binded to var, update him aswell
-        if (isVarBinded(vn)) {
+        if (ifVarBinded(vn)) {
             list<string> bv = this->bindMap.at(vn);
             this->updateCommandIsRunning = false;
             updateBindedVars(bv, newValue);
@@ -468,7 +540,7 @@ int Pro::setVar(string vn, double newValue) {
     } else {
         setVarInSymbolTable(vn, newValue);
         // if someone is binded to var, update him aswell
-        if (isVarBinded(vn)) {
+        if (ifVarBinded(vn)) {
             list<string> bv = this->bindMap.at(vn);
             this->updateCommandIsRunning = false;
             updateBindedVars(bv, newValue);
@@ -481,36 +553,70 @@ int Pro::setVar(string vn, double newValue) {
     return -1;
 }
 
-bool Pro::hasBindedVars(string vn) {
+/**
+ * this function returns true if the given var is binded, false otherwise
+ * @param var the given var
+ * @return true or false
+ */
+bool Pro::ifVarBinded(string var) {
     try {
-        this->bindMap.at(vn);
+        list<string> lis = bindMap.at(var);
         return true;
-    } catch (exception e) {
+    } catch (exception) {
         return false;
     }
 }
 
-void Pro:: setVarBind(string var1, string var2) {
-    if (hasBindedVars(var1)) {
-        this->bindMap.at(var1).push_back(var2);
-    } else {
-        list<string> names;
-        names.push_back(var2);
-        this->bindMap.insert(make_pair(var1, names));
-    }
-    if (hasBindedVars(var2)) {
-        this->bindMap.at(var2).push_back(var1);
-    } else {
-        list<string> names;
-        names.push_back(var1);
-        this->bindMap.insert(make_pair(var2, names));
-    }
+/**
+ * sets two vars and make them binded to each other
+ * @param main the first var
+ * @param secondary the second var
+ */
+void Pro:: setVarBind(string main, string secondary) {
+    // if the first var is already binded
+        if (ifVarBinded(main)) {
+            for (list<string>:: iterator it = bindMap.at(main).begin();it != bindMap.at(secondary).end(); it++ ) {
+                string curr = *it;
+                try {
+                    bindMap.at(curr).remove(secondary);
+                } catch (exception e) {
+
+                }
+                bindMap.at(curr).push_back(secondary);
+            }
+            bindMap.at(main).push_back(secondary);
+        } else {
+            list<string> tempList;
+            tempList.push_back(secondary);
+            bindMap.insert(make_pair(main, tempList));
+        }
+        if (ifVarBinded(secondary)) {
+            for (list<string>:: iterator it = bindMap.at(secondary).begin();it != bindMap.at(secondary).end(); it++ ) {
+                string curr = *it;
+                try {
+                    bindMap.at(curr).remove(main);
+                } catch (exception e) {
+
+                }
+                bindMap.at(curr).push_back(main);
+            }
+            bindMap.at(main).push_back(main);
+        } else {
+            list<string> tempList;
+            tempList.push_back(main);
+            bindMap.insert(make_pair(secondary, tempList));
+  }
 }
 
 unordered_map<string,double>* Pro::getSymbolTable() {
     return this->symbolTable;
 }
 
+/**
+ * a getter from the simulator
+ * @param directory the directory we want to know its value
+ * @return the value
+ */
 double Pro::getValueFromSimulator(string directory) {
     directory = removeApostrophes(directory);
     string s = "get " + directory + '\n';
@@ -521,6 +627,11 @@ double Pro::getValueFromSimulator(string directory) {
     return currVal;
 }
 
+/**
+ * returns true if the given sring includes a double
+ * @param s the given string
+ * @return true or false
+ */
 bool checkSixDigitsAfterDot (string s) {
     int i =0;
     for(char c=s[i];c!='.' && i < s.length();) {
@@ -532,6 +643,11 @@ bool checkSixDigitsAfterDot (string s) {
     return false;
 }
 
+/**
+ * sets the second lsit
+ * @param buffer the data
+ * @return the list
+ */
 list<list<double>> Pro::setSecondList(char* buffer) {
     list<list<double>> result;
     list<double> temp;
@@ -587,6 +703,13 @@ list<list<double>> Pro::setSecondList(char* buffer) {
     return result;
 }
 
+/**
+ * sets to the current string (which includes the data) the leftover data
+ * after the update
+ * @param buffer the leftover data
+ * @param start the starting index
+ * @return the list of the values
+ */
 list<double> Pro::setLeftovers(char* buffer,int start) {
     list<double> result;
     string s = "", lastNum = "";
@@ -625,6 +748,11 @@ list<double> Pro::setLeftovers(char* buffer,int start) {
     return result;
 }
 
+/**
+ * sets the first list
+ * @param buffer the data
+ * @return the list
+ */
 list<double> Pro::setFirstList(char* buffer) {
     list<double> result;
     bool quit = false;
@@ -667,6 +795,9 @@ list<double> Pro::setFirstList(char* buffer) {
     return result;
 }
 
+/**
+ * add the leftovers the the current string
+ */
 void Pro::addLeftToString() {
     // reset current
     this->current = "";
@@ -679,14 +810,26 @@ void Pro::addLeftToString() {
     this->left = "";
 }
 
+/**
+ * return the connected mode (connected or no)
+ * @return true or false
+ */
 bool Pro::getDoConnected() {
     return this->doConnected;
 }
 
+/**
+ * sets the connected mode
+ */
 void Pro::setDoConnected() {
     this->doConnected = true;
 }
 
+/**
+ * sets the lists
+ * @param l1 the first list
+ * @param l2 the second list
+ */
 void Pro::setLists(list<list<double>> l1, list<double> l2) {
     list<string>::iterator itDir = lines.begin();
     list<double> tempList;
@@ -719,14 +862,27 @@ void Pro::setLists(list<list<double>> l1, list<double> l2) {
     }
 }
 
+/**
+ * returns this buffer
+ * @return the buffer
+ */
 string Pro::getBuffer() {
     return this->buffer;
 }
 
+/**
+ * returns the size of this buffer
+ * @return the size
+ */
 int Pro::getBufferLength() {
     return this->size;
 }
 
+/**
+ * sets this buffer by a given buffer
+ * @param buff the given buffer
+ * @param size
+ */
 void Pro::setBuffer(string buff, int size) {
     this->size = size;
     char* ch = new (nothrow) char(sizeof(char) * size);
@@ -739,49 +895,91 @@ void Pro::setBuffer(string buff, int size) {
     }
 }
 
+/**
+ * add a name and its directory to our map
+ * @param name the name
+ * @param directory the directory of the given name
+ */
 void Pro::addNamesAndDirectory(string name, string directory) {
     this->namesAndDirectory.insert(make_pair(name, directory));
 }
 
+/**
+ * returns the map of the names and the directories
+ * @return the map
+ */
 unordered_map<string, string> Pro::getNamesAndDirectories() {
     return this->namesAndDirectory;
 }
 
+/**
+ * add the given var to the symbol table map
+ * @param name the name of the var
+ * @param d the value of the var
+ */
 void Pro::addSymbolTable(string name, double d) {
 
     this->symbolTable->insert(make_pair(name,d));
 
 }
 
+/**
+ * clear this list
+ */
 void Pro:: clearListForExp() {
    this->listForExp.clear();
 }
 
+/**
+ * returns the bindedMap
+ * @return
+ */
 unordered_map<string, list<string>> Pro::getBindMap() {
     return this->bindMap;
 }
 
+/**
+ * pop from the expressions values
+ */
 void Pro:: popFrontExp() {
     this->listForExp.pop_front();
 }
+/**
+ * sets the list of the expression by the given list
+ * @param l the given list
+ */
 void Pro:: setListForExp(list<string> l) {
     listForExp = l;
 }
 
+/**
+ * returns the list of the expressions
+ * @return the list
+ */
 list<string> Pro:: getListForExp(){
     return listForExp;
 }
 
+/**
+ * sets a var in the symbol table by the given value
+ * @param name the var we need to set
+ * @param value the new value
+ */
 void Pro::setVarInSymbolTable(string name, double value) {
-        if (isVarInSymbolTable(name)) {
-            symbolTable->erase(name);
+    for ( unordered_map<string,double>::iterator it = this->symbolTable->begin();
+    it != this->symbolTable->end() ;it++) {
+        if (it->first == name) {
+            it->second = value;
         }
-        symbolTable->insert(make_pair(name, value));
-        return;
+    }
 }
 
+/**
+ * sets a directory value by the given value, in the simulator
+ * @param directory the directory we need to update
+ * @param value the new value
+ */
 void Pro::setValueInSimulator(string directory, double value) {
-
     directory = removeApostrophes(directory);
     double IntegerValue = value;
     directory = removeApostrophes(directory);
@@ -794,18 +992,34 @@ void Pro::setValueInSimulator(string directory, double value) {
 
 }
 
+/**
+ * sets the ip by the given ip
+ * @param s the given ip
+ */
 void Pro::setIP(string s) {
     this->ip = s;
 }
 
+/**
+ * sets the port by the given port
+ * @param s the given port
+ */
 void Pro::setPort(string s) {
     this->port = s;
 }
 
+/**
+ * return the port
+ * @return the port
+ */
 string Pro::getPort() {
     return this->port;
 }
 
+/**
+ * returns the ip
+ * @return the ip
+ */
 string Pro::getIP() {
     return this->ip;
 }

@@ -2,6 +2,11 @@
 // Created by moriya on 13/12/18.
 //
 
+/**
+ * Pro is the data manager of the project, which is responsible of the
+ * tables, data and the all updating proccess is going through this class.
+ */
+
 #ifndef UNTITLED5_PRO_H
 #define UNTITLED5_PRO_H
 using namespace std;
@@ -45,8 +50,6 @@ class Pro {
     double currVal;
     list<string> listForExp;
     list<double> tempValues;
-    string need1;
-    double need2;
     unordered_map<string, double> temp;
     int getIndx(string);
     bool compareMaps(unordered_map<string, double>, string);
@@ -60,10 +63,6 @@ public:
     void setUpdateList(bool);
     void updateBindedVars(list<string>, double);
     void setLeft(char*, int, int);
-    void setNeed1(string);
-    void setNeed2(double);
-    string getNeed1();
-    double getNeed2();
     string protectedName;
     bool getRun();
     void setRun(bool);
@@ -90,7 +89,6 @@ public:
     void addLeftToString();
     Collector* getCollector();
     Collector* getCollectorCommands();
-    list<double> getValues(char*);
     bool isVarInSymbolTable(string vn);
     int setVar(string var, double newValue);
     void setVarBind(string var1, string var2 );
@@ -102,7 +100,7 @@ public:
     list<list<double>> setSecondList(char[]);
     list<double> setLeftovers(char* buffer,int start);
     void setLists(list<list<double>>, list<double>);
-    bool isVarBinded(string);
+    bool ifVarBinded(string);
     void addNamesAndDirectory(string, string);
     unordered_map<string, string> getNamesAndDirectories();
     string getNameByDirectory(string);

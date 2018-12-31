@@ -12,6 +12,7 @@
 #include "Command.h"
 #include <iostream>
 
+
 using namespace std;
 
 class PrintCommand : public Command {
@@ -19,7 +20,6 @@ class PrintCommand : public Command {
 
 public:
     PrintCommand(string line, string name, Pro* p);
-    string extractWordFromLine(string line);
     int doCommand();
 };
 

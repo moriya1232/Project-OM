@@ -5,10 +5,22 @@
 #include "OpenServerCommand.h"
 using namespace std;
 
+/**
+ * this is a constractor
+ * @param line
+ * @param name
+ * @param p - pro
+ */
 OpenServerCommand:: OpenServerCommand(string line, string name, Pro* p) : Command(line,name) {
     this->p = p;
 }
 
+/**
+ * this is for the thread for get the values
+ * @param s1
+ * @param s2
+ * @param osc
+ */
 void OpenServerCommand:: openServer(string s1, string s2, OpenServerCommand* osc) {
     int sockfd, newsockfd, portno, clilen;
     char buffer[100];
@@ -75,6 +87,12 @@ void OpenServerCommand:: openServer(string s1, string s2, OpenServerCommand* osc
     }
 }
 
+/**
+ * check if data are reciecved by check the buffer
+ * @param buffer
+ * @param n
+ * @return
+ */
 bool OpenServerCommand::dataReceived(char* buffer, int n) {
     string s = "";
     int i = 0;
@@ -89,12 +107,22 @@ bool OpenServerCommand::dataReceived(char* buffer, int n) {
     return false;
 }
 
+/**
+ * check the buffer id perporly
+ * @param c1
+ * @param c2
+ * @param c3
+ * @return true or false
+ */
 static bool checkBuffer(char c1, char c2, char c3) {
     if (c1 == 'e' && c2 == 'n' && c3 == 'd')
         return true;
     return false;
 }
-
+/**
+ * open a date for get values.
+ * @return
+ */
 int OpenServerCommand:: doCommand() {
     string lin = this->getLine().substr(extractWordFromLine(this->getLine()).length() + 1);
     // port number

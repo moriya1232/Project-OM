@@ -1,5 +1,9 @@
 //
-// Created by omer on 12/8/18.
+// Created by :
+// omer shitrit 206333015
+// and
+// moriya leopold 208116483
+//
 //
 
 #include "ConnectServerCommand.h"
@@ -8,10 +12,21 @@
 
 using namespace std;
 
+/**
+ * constractor for connect server
+ * @param line
+ * @param name
+ * @param p
+ */
 ConnectServerCommand:: ConnectServerCommand(string line, string name, Pro* p) :Command(line,name) {
     this->p = p;
 }
 
+/**
+ * copy a string to char*
+ * @param arr
+ * @param s
+ */
 void ConnectServerCommand::strcpy(char* arr, string s) {
     int i;
     for (i = 0; i < s.length(); i++) {
@@ -20,6 +35,11 @@ void ConnectServerCommand::strcpy(char* arr, string s) {
     arr[i] = '\n';
 }
 
+/**
+ * clear ip
+ * @param arr
+ * @param length
+ */
 void ConnectServerCommand::clearIP(char* arr, int length) {
     int i = 0;
     char c = arr[i];
@@ -32,16 +52,10 @@ void ConnectServerCommand::clearIP(char* arr, int length) {
     }
 }
 
-string ConnectServerCommand:: extractWordFromLine(string line) {
-    string result = "";
-    int i = 0;
-    while (line[i] != ' ' && line[i] != '\n' && i < line.length()) {
-        result += line[i];
-        i++;
-    }
-    return result;
-}
-
+/**
+ * set the buffer
+ * @param buffer
+ */
 void ConnectServerCommand::setBuffer(char* buffer) {
     int i = 0;
     string origin = this->p->getBuffer();
@@ -53,12 +67,24 @@ void ConnectServerCommand::setBuffer(char* buffer) {
     }
 }
 
+/**
+ * has massage in the buffer?
+ * @param buffer
+ * @return true ot false
+ */
 bool ConnectServerCommand::hasMessage(char buffer[]) {
     if (buffer[0] != '\0')
         return true;
     return false;
 }
 
+/**
+ * this function help to connect the server and send values
+ * @param IP
+ * @param portNumber
+ * @param csc
+ * @param num
+ */
 void ConnectServerCommand:: connectServer(char* IP, string portNumber, ConnectServerCommand* csc, int num) {
     int sockfd, portno, n;
     struct sockaddr_in serv_addr;
@@ -140,6 +166,12 @@ void ConnectServerCommand:: connectServer(char* IP, string portNumber, ConnectSe
     close(sockfd);
 }
 
+/**
+ * check if there is none in the word
+ * @param buffer
+ * @param n
+ * @return
+ */
 bool ConnectServerCommand::lookForNone(char* buffer, int n) {
     string s = "";
     int i = 0;
@@ -156,18 +188,12 @@ bool ConnectServerCommand::lookForNone(char* buffer, int n) {
     return true;
 }
 
-
-bool ConnectServerCommand::ifShouldUpdate(char c) {
-    if (c == 'g') {
-        return true;
-    }
-    return false;
-}
-
-void ConnectServerCommand::setValue(string vn, double value) {
-    this->p->setVar(vn, value);
-}
-
+/**
+ * this function check if need to update
+ * @param buffer
+ * @param length
+ * @return true or false
+ */
 bool ConnectServerCommand::haveToUpdate(char* buffer, int length) {
     int i = 0;
     char c = buffer[i];
@@ -180,6 +206,12 @@ bool ConnectServerCommand::haveToUpdate(char* buffer, int length) {
     return false;
 }
 
+/**
+ * this function parse the string of values
+ * @param buffer
+ * @param length
+ * @return
+ */
 double ConnectServerCommand::parseResult(char* buffer, int length) {
     if (lookForNone(buffer,length)) {
         return 0;
@@ -227,6 +259,10 @@ double ConnectServerCommand::parseResult(char* buffer, int length) {
         return 0;
 }
 
+/**
+ * do the command by connect to server
+ * @return 0
+ */
 int ConnectServerCommand:: doCommand(){
     while (!this->p->getDoConnected()) {}
     string tempLine = this->getLine();

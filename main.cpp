@@ -18,7 +18,6 @@
 #include "SleepCommand.h"
 #include <regex>
 #include "Enterc.h"
-#include "ExitCommand.h"
 
 
 
@@ -41,6 +40,14 @@ bool checkIfProper(string name, string line) {
     }
 }
 
+/**
+ * this function check wether command it need to be
+ * @param line
+ * @param lines
+ * @param counter
+ * @param p
+ * @return the command
+ */
 Command* parseCommand(string line,list<string> lines, int& counter, Pro* p) {
 
     if (extractWordFromLine(line) == "Enterc" || extractWordFromLine(line) == "enterc") {
@@ -54,7 +61,7 @@ Command* parseCommand(string line,list<string> lines, int& counter, Pro* p) {
     string temp = line;
     string commandFromLine = extractWordFromLine(line);
     if (commandFromLine == "}") {
-        EndCommand* end = new (nothrow) EndCommand(line, "End");
+        Command* end = new (nothrow) EndCommand(line, "End");
         p->getCollectorCommands()->addItem((end));
         //cp = &end;
         return end;
@@ -74,21 +81,21 @@ Command* parseCommand(string line,list<string> lines, int& counter, Pro* p) {
         if (!checkIfProper("open", line)){
             throw "the line of openDataServer don't properly!";
         }
-        OpenServerCommand* c1 = new (nothrow) OpenServerCommand(line, "OpenServer",p);
+        Command* c1 = new (nothrow) OpenServerCommand(line, "OpenServer",p);
         p->getCollectorCommands()->addItem(c1);
         return c1;
     } else if (commandFromLine == "connect") {
         if (!checkIfProper("connect", line)) {
             throw "the line of connect don't properly!";
         }
-        ConnectServerCommand* c2 = new (nothrow) ConnectServerCommand(line,"ConnectServer", p);
+        Command* c2 = new (nothrow) ConnectServerCommand(line,"ConnectServer", p);
         p->getCollectorCommands()->addItem(c2);
         return c2;
     } else if (commandFromLine == "var") {
         if (!checkIfProper("var", line)) {
             throw "the line of var don't properly!";
         }
-        SetVarCommand* c3 = new (nothrow) SetVarCommand(line, "Var", p);
+        Command* c3 = new (nothrow) SetVarCommand(line, "Var", p);
         p->getCollectorCommands()->addItem(c3);
         return c3;
 
@@ -112,7 +119,7 @@ Command* parseCommand(string line,list<string> lines, int& counter, Pro* p) {
             }
         }
         list<Command*> commands = getCommands(linesInLoop, p);
-        LoopCommand* loop = new (nothrow) LoopCommand(line,"Loop", commands ,p);
+        Command* loop = new (nothrow) LoopCommand(line,"Loop", commands ,p);
         p->getCollectorCommands()->addItem(loop);
         return loop;
     } else if (commandFromLine == "if") {
@@ -134,31 +141,32 @@ Command* parseCommand(string line,list<string> lines, int& counter, Pro* p) {
             }
         }
         list<Command*> commands = getCommands(linesInIf, p);
-        IfCommand* ifCommand = new (nothrow) IfCommand(line,"If", commands ,p);
+        Command* ifCommand = new (nothrow) IfCommand(line,"If", commands ,p);
         p->getCollectorCommands()->addItem(ifCommand);
         return ifCommand;
     } else if (commandFromLine == "print") {
-        PrintCommand* print = new (nothrow) PrintCommand(line,"Print",p);
+        Command* print = new (nothrow) PrintCommand(line,"Print",p);
         p->getCollectorCommands()->addItem(print);
         return print;
     } else if (commandFromLine == "sleep") {
         line = line.substr(extractWordFromLine(line).length() + 1);
         string time = extractWordFromLine(line);
-        SleepCommand* sc = new (nothrow) SleepCommand(line, "sleep", time);
+        Command* sc = new (nothrow) SleepCommand(line, "sleep", time);
         p->getCollectorCommands()->addItem(sc);
         return sc;
-    } else if (commandFromLine == "exit") {
-        ExitCommand* ex = new (nothrow) ExitCommand(line, "exit", p);
-        p->getCollectorCommands()->addItem(ex);
-        return ex;
-    }
-    else {
-        UpdateCommand* c4 = new (nothrow) UpdateCommand(line,"update", p);
+    } else {
+        Command* c4 = new (nothrow) UpdateCommand(line,"update", p);
         p->getCollectorCommands()->addItem(c4);
         return c4;
     }
 }
 
+/**
+ * get the commands.
+ * @param lines
+ * @param p
+ * @return
+ */
 list<Command*> getCommands(list<string> lines, Pro* p) {
     list<Command*> result;
     int counter=0;
@@ -181,6 +189,11 @@ list<Command*> getCommands(list<string> lines, Pro* p) {
     return result;
 }
 
+/**
+ * this is the lexer
+ * @param fileName
+ * @return
+ */
 list<string> lexer(string fileName) {
     ifstream inFile(fileName);
     string line = "";
@@ -196,7 +209,7 @@ list<string> lexer(string fileName) {
     return result;
 }
 
-int main() {
+int main(int argc, char** argv) {
     Pro* p = new (nothrow) Pro(symbolTable);
     list<string> namesOfCommands = lexer("Test.txt");
     list<Command*> commands = getCommands(namesOfCommands, p);
@@ -206,6 +219,12 @@ int main() {
         c = *it;
         if (c != NULL)
             c->doCommand();
+        if (c->getName() == "print") {
+            int x = 5;
+        }
     }
+    cout<<"hi"<<endl;
+    delete(p);
+    cout<< "bye"<<endl;
     return 0;
 }

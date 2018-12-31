@@ -4,10 +4,21 @@
 
 #include "SetVarCommand.h"
 
+/**
+ * constractor
+ * @param line
+ * @param name
+ * @param p
+ */
 SetVarCommand:: SetVarCommand(string line, string name, Pro* p) :Command(line, name) {
     this->p = p;
 }
 
+/**
+ * get the var after thr"="
+ * @param line
+ * @return string
+ */
 string SetVarCommand::getOtherVar(string line) {
     int i = 0;
     string s = "";
@@ -30,6 +41,11 @@ string SetVarCommand::getOtherVar(string line) {
     return s;
 }
 
+/**
+ * get the name from line
+ * @param line
+ * @return the ncme
+ */
 string extractName(string line) {
     int i = 0, count = 0;
     char c = line[i];
@@ -45,9 +61,11 @@ string extractName(string line) {
     line = line.substr(extractWordFromLine(line).length() + 1);
     return extractWordFromLine(line);
 }
-
+/**
+ * extract the name
+ * @return 0 it cussess
+ */
 int SetVarCommand::  doCommand() {
-    //var throttle = bind "/controls/engines/engine/throttle"
     double value = 0;
     string varName = extractName(this->getLine());
     // get the directory
@@ -55,28 +73,26 @@ int SetVarCommand::  doCommand() {
     string otherVar = getOtherVar(this->getLine());
     otherVar = removeSpaces(otherVar);
     directory = removeApostrophes(directory);
-    // meaning this var has a directory - FIRST CASE
+    // had directory
     if (directory != "") {
         if(this->p->isVarInSymbolTable(directory)) {
             value = this->p->getSymbolTable()->at(directory);
         } else {
             value =0;
         }
-    } else { // meaning there is no directory in the simulator
-        if (this->p->isVarInSymbolTable(otherVar)) { // meaning this Vas is equal to an exsist Var
+    } else {
+        if (this->p->isVarInSymbolTable(otherVar)) {
             value = this->p->getSymbolTable()->at(otherVar);
-        } else { // meaning this var is equal to an expression
+        } else {
             value = makeExpression(otherVar, p)->calculate();
         }
     }
-    // if this Var isnt in the symbol table, add it
+    //update
     if (!this->p->isVarInSymbolTable(varName)) {
         this->p->addSymbolTable(varName, value);
-    // if the var is already in the symbol table, update its value
     } else {
         this->p->setVarInSymbolTable(varName, value);
     }
-    // if we need tobind this Var, bind it two-ways binding
     if (shouldBind()) {
         if (varName == "rpm") {
             int x  =5;
@@ -90,6 +106,10 @@ int SetVarCommand::  doCommand() {
     }
 }
 
+/**
+ * if should bind
+ * @return true or false
+ */
 bool SetVarCommand::shouldBind() {
     string line = this->getLine();
     bool found1 = false, found2 = false;
@@ -101,6 +121,7 @@ bool SetVarCommand::shouldBind() {
             s += c;
             c = line[++i];
         }
+        //check if bind or var
         if (s == "var") {
             found1 = true;
         }

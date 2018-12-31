@@ -19,11 +19,24 @@ using namespace std;
 
 using namespace std;
 
+
+/**
+ *check if operator
+ * @param c
+ * @return true or false
+ */
 static bool checkIfOperator(char c) {
     if (c == '+' || c == '-' || c == '/' || c == '*' || c=='\342')
         return true;
     return false;
 }
+
+
+/**
+ *check if < or > or = for to knoe if it condition
+ * @param c
+ * @return true or false
+ */
 static bool checkIfCondition(char c) {
     if (c == '=' || c == '<' || c == '>') {
         return true;
@@ -31,23 +44,47 @@ static bool checkIfCondition(char c) {
     return false;
 }
 
+/**
+ * check if it is a digit
+ * @param c
+ * @return true or false
+ */
 static bool checkIfDigit(char c) {
     if (c - '0' >= 0 && c - '0' < 10)
         return true;
     return false;
 }
 
+
+/**
+ *check if letter
+ * @param c
+ * @return true or false
+ */
 static bool checkIfLetter(char c) {
     if ((c - '0' >= 'a' - '0' && c - '0' <= 'z' - '0') || (c - '0' >= 'A' - '0' && c - '0' <= 'Z' - '0'))
         return true;
     return false;
 }
+
+
+/**
+ *check if small letter
+ * @param c
+ * @return true or false
+ */
 static bool checkIfSmallLetter(char c) {
     if ((c - '0' >= 'a' - '0' && c - '0' <= 'z' - '0'))
         return true;
     return false;
 }
 
+
+/**
+ *check if }
+ * @param c
+ * @return true or false
+ */
 static bool ifStackHasGreaterOperator(char oper, string oper2) {
     string oper1 = to_string(oper);
     if (oper1 == "+" || oper1 == "-")
@@ -56,18 +93,45 @@ static bool ifStackHasGreaterOperator(char oper, string oper2) {
     return false;
 }
 
+/**
+ *check if {
+ * @param c
+ * @return true or false
+ */
 static bool checkOpenClosure(char c) {
     if (c == '(')
         return true;
     return false;
 }
 
+/**
+ *check id }
+ * @param c
+ * @return true or false
+ */
 static bool checkCloseClosure(char c) {
     if (c == ')')
         return true;
     return false;
 }
+/**
+ * extract the number
+ * @param line
+ * @return the number
+ */
+static string extractNum (string line) {
+    string result = "";
+    for (int i=0;checkIfDigit(line[i]);i++) {
+        result+=line[i];
+    }
+    return result;
+}
 
+/**
+ * this function remove spaces from right
+ * @param line
+ * @return the string after the change
+ */
 static string removeSpacingFromBegin(string line) {
     for(int i=0; line[i] == ' ' || line[i] == '\t' || line[i] == '\b';) {
         line = line.substr(1, line.length()-1);
@@ -75,6 +139,11 @@ static string removeSpacingFromBegin(string line) {
     return line;
 }
 
+/**
+ * this function remoce spaces from the end
+ * @param line
+ * @return the string after the change
+ */
 static string removeSpacingFromEnd(string line) {
     int i = line.length()-1;
     for(; line[i] == ' ' || line[i] == '\t' || line[i] == '\b';--i) {}
@@ -82,11 +151,22 @@ static string removeSpacingFromEnd(string line) {
     return line;
 }
 
+/**
+ * remove the spcaes after tnf befor the word
+ * @param line
+ * @return the string after the change
+ */
 static string removeSpaces(string line) {
     line = removeSpacingFromBegin(line);
     line = removeSpacingFromEnd(line);
     return line;
 }
+
+/**
+ * remove the apostrophes
+ * @param line
+ * @return the string after the change
+ */
 static string removeApostrophes(string line) {
     line = removeSpaces(line);
     if (line[0] == '"' && line[line.length() - 1] == '"') {
@@ -96,8 +176,11 @@ static string removeApostrophes(string line) {
     return line;
 }
 
-
-
+/**
+ * remove the {
+ * @param line
+ * @return line after the change
+ */
 static string removeOpenSpiPar(string line) {
     line = removeSpaces(line);
     if(line[line.length()-1] == '{') {
@@ -105,14 +188,22 @@ static string removeOpenSpiPar(string line) {
     }
     return line;
 }
-
+/**
+ * remove the equal in the string
+ * @param line
+ * @return the string after the change
+ */
 static string removeEqual(string line) {
     for(int i=0;line[i] == ' ' || line[i] == '=' ;) {
         line = line.substr(1, line.length()-1);
     }
     return line;
 }
-
+/**
+ * removr the paranthesis from line
+ * @param line
+ * @return the string after the change
+ */
 static string removeParenthesis(string line) {
     line = removeSpaces(line);
     int counter = 0;
@@ -135,8 +226,11 @@ static string removeParenthesis(string line) {
     }
     return line;
 }
-
-
+/**
+ * extract a var
+ * @param line
+ * @return the var name
+ */
 static string extractVar (string line) {
     char ch = line[0];
     string forVar = "";
@@ -158,6 +252,11 @@ static Expression* insertExpressionsToA (BinaryExpression* a, list<string> lis) 
 
 }
 
+/**
+ * check if the line exist number
+ * @param ex
+ * @return true or false
+ */
 static bool existNum(string ex){
     if (ex == "") {
         return false;
@@ -172,7 +271,11 @@ static bool existNum(string ex){
     return false;
 }
 
-
+/**
+ * this is a recursive function for take a list of string and connvert it to expression
+ * @param pro
+ * @return
+ */
 static Expression* getExpression(Pro* pro) {
     if(pro->getListForExp().size()==0) {
         return NULL;
@@ -211,7 +314,11 @@ static Expression* getExpression(Pro* pro) {
     a->setLeft(ex2);
     return a;
 }
-
+/**
+ * extract the firector from line
+ * @param line
+ * @return strin of directory
+ */
 static string extractDirectory (string line) {
     char c=line[0];
     int i=0;
@@ -233,47 +340,13 @@ static string extractDirectory (string line) {
     }
     return line;
 }
-static string removeBind (string line) {
-    char c = line[0];
-    string result="";
-    string temp1;
-    string temp2;
-    for (int i=0; i<line.length()-4;i++){
-        if (c=='b' && line[i+1] == 'i' && line[i+2] == 'n' && line[i+3] == 'd') {
-            temp1 = line.substr(0,i);
-            temp2 = line.substr(i+4,line.length()-1);
-            result = temp1+temp2;
-        }
-        c = line[i];
-    }
-    return result;
-}
-
-static string extractSecondVar (string line) {
-    int i=0;
-    char c = line[i];
-    while (c != '=') {
-        c = line[++i];
-    }
-    if (i>=line.length()) {
-        return "";
-    }
-    line = line.substr(i+1, line.length()-1);
-    line = removeSpaces(line);
-    line = removeBind(line);
-    line = removeSpaces(line);
-    return line;
-}
-
-
-
-static string extractNum (string line) {
-    string result = "";
-    for (int i=0;checkIfDigit(line[i]);i++) {
-        result+=line[i];
-    }
-    return result;
-}
+/**
+ * this function take a string and convert it to expression
+ * is is done by the algorithms that we shown in the video
+ * @param line
+ * @param pro
+ * @return reult Expression
+ */
 static Expression* makeExpression(string line, Pro* pro) {
     line = removeSpaces(line);
     if(checkIfOperator(line[0])) {
@@ -300,6 +373,7 @@ static Expression* makeExpression(string line, Pro* pro) {
     char c;
     string s = "";
     bool indicator = true;
+    //those variebles hlp us to calculate expression like this:"5*(-1)
     bool forMinusAndPlus = false;
     bool changeToMinus = false;
     while (indx < length) {
@@ -311,13 +385,6 @@ static Expression* makeExpression(string line, Pro* pro) {
             forMinusAndPlus = false;
             string takeNum = line.substr(indx-1, line.length());
             takeNum = extractNum(takeNum);
-            /*while (checkIfDigit(line[indx])) {
-                c = line[indx];
-                temp = stoi(s) * 10;
-                temp += (c - '0');
-                s = to_string(temp);
-                indx++;
-            }*/
             indx+=takeNum.length()-1;
             if (takeNum !="") {
                 if(changeToMinus) {
@@ -326,8 +393,10 @@ static Expression* makeExpression(string line, Pro* pro) {
                 numbers.push(takeNum);
                 changeToMinus = false;
             }
+            // is }
         } else if (checkOpenClosure(c))  {
             operators.push(s);
+            //is {
         } else if (checkCloseClosure(c)) {
             if (forMinusAndPlus) {
                 throw "illigal exception: +) or -)";
@@ -341,6 +410,7 @@ static Expression* makeExpression(string line, Pro* pro) {
                 }
             }
             operators.pop();
+            // is operator
         } else if (checkIfOperator(c)) {
             if(forMinusAndPlus) {
                 if (operators.top()=="-" && c=='-') {
@@ -370,6 +440,7 @@ static Expression* makeExpression(string line, Pro* pro) {
                 }
             }
             operators.push(s);
+            //is var
         } else if (checkIfLetter(c)) {
             forMinusAndPlus = false;
             string takeVar = line.substr(indx-1, line.length());
@@ -377,14 +448,12 @@ static Expression* makeExpression(string line, Pro* pro) {
             if (changeToMinus) {
                 takeVar = "-" + takeVar;
             }
-            //var1 =  new (nothrow) Var(forVar,pro->getSymbolTable()->at(takeVar));
             numbers.push(takeVar);
             indx+=takeVar.length()-1;
             changeToMinus = false;
 
         }
         s = "";
-        indicator = true;
     }
     while (!operators.empty()) {
         string tempString = operators.top();
@@ -406,11 +475,11 @@ static Expression* makeExpression(string line, Pro* pro) {
     return e;
 }
 
-/*static findMinusAndPlus(string line) {
-    char c = line[0];
-    for(int i=0;c[i] != '-' && i<;i++)
-}*/
-
+/**
+ * extract the first word from line
+ * @param line
+ * @return word
+ */
 static string extractWordFromLine(string line) {
     line = removeSpaces(line);
     string result = "";
@@ -422,6 +491,11 @@ static string extractWordFromLine(string line) {
     return result;
 }
 
+/**
+ * ectract the expressin
+ * @param line
+ * @return the expressin
+ */
 static string extractExpression(string line) {
     line = removeSpaces(line);
     string ex = "";
@@ -430,7 +504,11 @@ static string extractExpression(string line) {
     }
     return ex;
 }
-
+/**
+ * ectract the sign
+ * @param line
+ * @return the sign
+ */
 static string extractSign(string line) {
     line = removeSpaces(line);
     string sign = "";
