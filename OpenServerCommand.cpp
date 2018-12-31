@@ -135,7 +135,7 @@ int OpenServerCommand:: doCommand() {
     Expression* a2 = makeExpression(s2, p);
     double d2 = a2->calculate();
     OpenServerCommand* osc = new (nothrow) OpenServerCommand("", "", this->p);
-    osc->p->getCollector()->addItem(osc);
+    osc->p->getCollectorCommands()->addItem(osc);
     thread listenToServer(openServer,to_string(d1),to_string(d2), osc);
     listenToServer.detach();
     return 0;

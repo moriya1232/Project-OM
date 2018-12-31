@@ -283,7 +283,8 @@ int ConnectServerCommand:: doCommand(){
     }
     ConnectServerCommand* csc = new (nothrow) ConnectServerCommand("", "", this->p);
     char* cc = new char[arr[n]];
-    this->p->getCollector()->addItem(cc);
+    this->p->getCollectorCommands()->addItem(csc);
+    this->p->getCollectorCommands()->addItem(cc);
     strcpy(cc, s1);
     connectServer(cc, to_string(d), csc, n+1);
 }

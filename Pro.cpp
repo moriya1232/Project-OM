@@ -5,17 +5,18 @@
 #include "Pro.h"
 #include <string>
 #include "ConnectServerCommand.h"
+
 using namespace std;
 
 /**
  * this function is a constractor
  * @param map  - the symbol table.
  */
-Pro:: Pro(unordered_map<string,double>* map) {
+Pro::Pro(unordered_map<string, double> *map) {
     this->symbolTable = map;
     setSymbolTable();
     this->buffer = "";
-    unordered_map<string,list<string>> bindMap;
+    unordered_map<string, list<string>> bindMap;
     this->bindMap = bindMap;
     list<double> tempList;
     list<list<double>> tempList2;
@@ -27,9 +28,9 @@ Pro:: Pro(unordered_map<string,double>* map) {
     this->current = "";
     this->left = "";
     this->hasEnd = false;
-    Collector* c = new (nothrow) Collector();
+    Collector *c = new(nothrow) Collector();
     this->collector = c;
-    Collector* c2 = new (nothrow) Collector();
+    Collector *c2 = new(nothrow) Collector();
     this->collectorCommands = c2;
     this->needToUpdate = 0;
     changed = false;
@@ -45,8 +46,8 @@ Pro:: Pro(unordered_map<string,double>* map) {
 /**
  * create the collector for all the objects
  */
-void Pro::createCollector(){
-    Collector* c = new (nothrow) Collector();
+void Pro::createCollector() {
+    Collector *c = new(nothrow) Collector();
     this->collector = c;
 }
 
@@ -109,7 +110,7 @@ int Pro::getIndx(string s) {
         if (*it == s) {
             return count;
         }
-        count ++;
+        count++;
     }
     // meaning there is no match
     return -1;
@@ -137,7 +138,7 @@ Pro::~Pro() {
  * @param indx starting index
  * @param n end index
  */
-void Pro::setLeft(char* buffer, int indx, int n) {
+void Pro::setLeft(char *buffer, int indx, int n) {
     for (int i = indx; i < n; i++) {
         this->left += buffer[i];
     }
@@ -165,7 +166,7 @@ list<double> Pro::getTempValues() {
  */
 list<double> Pro::makeList() {
     list<double> values;
-    if(this->ip == "" || this->port == "") {
+    if (this->ip == "" || this->port == "") {
         return values;
     }
     // first put all the values in a list
@@ -187,8 +188,7 @@ list<double> Pro::makeList() {
         }
         if (i < s.length() - 1) {
             c = s[++i];
-        }
-        else {
+        } else {
             break;
         }
     }
@@ -202,8 +202,8 @@ list<double> Pro::makeList() {
 void Pro::updateValues() {
     unordered_map<string, double> tempMap = *symbolTable;
     bool changeValue = false;
-    cout << "this buffer is: " <<this->current << endl;
-    if(this->ip == "" || this->port == "") {
+    cout << "this buffer is: " << this->current << endl;
+    if (this->ip == "" || this->port == "") {
         return;
     }
     // first put all the values in a list
@@ -226,8 +226,7 @@ void Pro::updateValues() {
         }
         if (i < s.length() - 1) {
             c = s[++i];
-        }
-        else {
+        } else {
             break;
         }
     }
@@ -289,15 +288,16 @@ bool Pro::compareMaps(unordered_map<string, double> m, string s) {
  * returns the collector which is responsible of releasing allocated memory
  * @return the collector
  */
-Collector* Pro::getCollector() {
+Collector *Pro::getCollector() {
     return this->collector;
 }
+
 /**
  * retunrs the collector which is responsible of releasing allocated memory
  * in loops
  * @return the collector
  */
-Collector* Pro::getCollectorCommands() {
+Collector *Pro::getCollectorCommands() {
     return this->collectorCommands;
 }
 
@@ -306,7 +306,7 @@ Collector* Pro::getCollectorCommands() {
  * @param buffer if the given daya
  * @param n the data's length
  */
-void Pro::setString (char* buffer, int n) {
+void Pro::setString(char *buffer, int n) {
     int indx = -1;
     // check whether the buffer includes \n
     for (int i = 0; i < n; i++) {
@@ -323,7 +323,7 @@ void Pro::setString (char* buffer, int n) {
         for (int i = 0; i < indx; i++) {
             this->current += buffer[i];
         }
-        setLeft(buffer, indx +1, n);
+        setLeft(buffer, indx + 1, n);
     }
 }
 
@@ -347,8 +347,8 @@ bool Pro::isVarInSymbolTable(string vn) {
  * @return the name
  */
 string Pro::getNameByDirectory(string direct) {
-    unordered_map<string,string> m = this->namesAndDirectory;
-    for (unordered_map<string,string>::iterator it = m.begin(); it != m.end(); it++) {
+    unordered_map<string, string> m = this->namesAndDirectory;
+    for (unordered_map<string, string>::iterator it = m.begin(); it != m.end(); it++) {
         string currDir = it->second;
         if (currDir == direct) {
             return it->first;
@@ -380,7 +380,7 @@ bool Pro::compareLists(list<double> l1, list<double> l2) {
 /**
  * sets the pathes if the xml in the symbol table
  */
-void Pro:: setSymbolTable() {
+void Pro::setSymbolTable() {
     symbolTable->insert(make_pair("/instrumentation/airspeed-indicator/indicated-speed-kt", 0));
     symbolTable->insert(make_pair("/instrumentation/altimeter/indicated-altitude-ft", 0));
     symbolTable->insert(make_pair("/instrumentation/altimeter/pressure-alt-ft", 0));
@@ -394,7 +394,7 @@ void Pro:: setSymbolTable() {
     symbolTable->insert(make_pair("/instrumentation/gps/indicated-ground-speed-kt", 0));
     symbolTable->insert(make_pair("/instrumentation/gps/indicated-vertical-speed", 0));
     symbolTable->insert(make_pair("/instrumentation/heading-indicator/indicated-heading-deg", 0));
-    symbolTable->insert(make_pair("/instrumentation/magnetic-compass/offset-deg", 0));
+    symbolTable->insert(make_pair("/instrumentation/magnetic-compass/indicated-heading-deg", 0));
     symbolTable->insert(make_pair("/instrumentation/slip-skid-ball/indicated-slip-skid", 0));
     symbolTable->insert(make_pair("/instrumentation/turn-indicator/indicated-turn-rate", 0));
     symbolTable->insert(make_pair("/instrumentation/vertical-speed-indicator/indicated-speed-fpm", 0));
@@ -409,7 +409,7 @@ void Pro:: setSymbolTable() {
 /**
  * sets the pathes of the xml in the lines list
  */
-void Pro:: setLines(){
+void Pro::setLines() {
     this->lines.push_back("/instrumentation/airspeed-indicator/indicated-speed-kt");
     this->lines.push_back("/instrumentation/altimeter/indicated-altitude-ft");
     this->lines.push_back("/instrumentation/altimeter/pressure-alt-ft");
@@ -423,7 +423,7 @@ void Pro:: setLines(){
     this->lines.push_back("/instrumentation/gps/indicated-ground-speed-kt");
     this->lines.push_back("/instrumentation/gps/indicated-vertical-speed");
     this->lines.push_back("/instrumentation/heading-indicator/indicated-heading-deg");
-    this->lines.push_back("/instrumentation/magnetic-compass/offset-deg");
+    this->lines.push_back("/instrumentation/magnetic-compass/indicated-heading-deg");
     this->lines.push_back("/instrumentation/slip-skid-ball/indicated-slip-skid");
     this->lines.push_back("/instrumentation/turn-indicator/indicated-turn-rate");
     this->lines.push_back("/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
@@ -483,7 +483,7 @@ void Pro::updateBindedVars(list<string> bv, double val) {
     for (list<string>::iterator it = bv.begin(); it != bv.end(); it++) {
         string currName = *it;
         setVarInSymbolTable(currName, val);
-        if(currName[0]=='/') {
+        if (currName[0] == '/') {
             setValueInSimulator(currName, val);
         }
     }
@@ -498,7 +498,7 @@ bool Pro::hasDirectory(string vn) {
     try {
         this->namesAndDirectory.at(vn);
         return true;
-    } catch  (exception e) {
+    } catch (exception e) {
         return false;
     }
 }
@@ -570,43 +570,43 @@ bool Pro::ifVarBinded(string var) {
  * @param main the first var
  * @param secondary the second var
  */
-void Pro:: setVarBind(string main, string secondary) {
+void Pro::setVarBind(string main, string secondary) {
     // if the first var is already binded
-        if (ifVarBinded(main)) {
-            for (list<string>:: iterator it = bindMap.at(main).begin();it != bindMap.at(secondary).end(); it++ ) {
-                string curr = *it;
-                try {
-                    bindMap.at(curr).remove(secondary);
-                } catch (exception e) {
+    if (ifVarBinded(main)) {
+        for (list<string>::iterator it = bindMap.at(main).begin(); it != bindMap.at(secondary).end(); it++) {
+            string curr = *it;
+            try {
+                bindMap.at(curr).remove(secondary);
+            } catch (exception e) {
 
-                }
-                bindMap.at(curr).push_back(secondary);
             }
-            bindMap.at(main).push_back(secondary);
-        } else {
-            list<string> tempList;
-            tempList.push_back(secondary);
-            bindMap.insert(make_pair(main, tempList));
+            bindMap.at(curr).push_back(secondary);
         }
-        if (ifVarBinded(secondary)) {
-            for (list<string>:: iterator it = bindMap.at(secondary).begin();it != bindMap.at(secondary).end(); it++ ) {
-                string curr = *it;
-                try {
-                    bindMap.at(curr).remove(main);
-                } catch (exception e) {
+        bindMap.at(main).push_back(secondary);
+    } else {
+        list<string> tempList;
+        tempList.push_back(secondary);
+        bindMap.insert(make_pair(main, tempList));
+    }
+    if (ifVarBinded(secondary)) {
+        for (list<string>::iterator it = bindMap.at(secondary).begin(); it != bindMap.at(secondary).end(); it++) {
+            string curr = *it;
+            try {
+                bindMap.at(curr).remove(main);
+            } catch (exception e) {
 
-                }
-                bindMap.at(curr).push_back(main);
             }
-            bindMap.at(main).push_back(main);
-        } else {
-            list<string> tempList;
-            tempList.push_back(main);
-            bindMap.insert(make_pair(secondary, tempList));
-  }
+            bindMap.at(curr).push_back(main);
+        }
+        bindMap.at(main).push_back(main);
+    } else {
+        list<string> tempList;
+        tempList.push_back(main);
+        bindMap.insert(make_pair(secondary, tempList));
+    }
 }
 
-unordered_map<string,double>* Pro::getSymbolTable() {
+unordered_map<string, double> *Pro::getSymbolTable() {
     return this->symbolTable;
 }
 
@@ -630,12 +630,12 @@ double Pro::getValueFromSimulator(string directory) {
  * @param s the given string
  * @return true or false
  */
-bool checkSixDigitsAfterDot (string s) {
-    int i =0;
-    for(char c=s[i];c!='.' && i < s.length();) {
-        c= s[++i];
+bool checkSixDigitsAfterDot(string s) {
+    int i = 0;
+    for (char c = s[i]; c != '.' && i < s.length();) {
+        c = s[++i];
     }
-    if (s.length()-i +1 == 6) {
+    if (s.length() - i + 1 == 6) {
         return true;
     }
     return false;
@@ -646,7 +646,7 @@ bool checkSixDigitsAfterDot (string s) {
  * @param buffer the data
  * @return the list
  */
-list<list<double>> Pro::setSecondList(char* buffer) {
+list<list<double>> Pro::setSecondList(char *buffer) {
     list<list<double>> result;
     list<double> temp;
     string s = "";
@@ -708,7 +708,7 @@ list<list<double>> Pro::setSecondList(char* buffer) {
  * @param start the starting index
  * @return the list of the values
  */
-list<double> Pro::setLeftovers(char* buffer,int start) {
+list<double> Pro::setLeftovers(char *buffer, int start) {
     list<double> result;
     string s = "", lastNum = "";
     bool run = true;
@@ -732,7 +732,7 @@ list<double> Pro::setLeftovers(char* buffer,int start) {
         lastNum = s;
         s = "";
     }
-    if (!checkSixDigitsAfterDot(lastNum)){
+    if (!checkSixDigitsAfterDot(lastNum)) {
         for (int j = 0; j < lastNum.length(); j++) {
             if (lastNum[j] - '0' >= 0 && lastNum[j] - '0' < 10 || lastNum[j] == '.' || lastNum[j] == '\n') {
                 this->halfNum += lastNum[j];
@@ -751,7 +751,7 @@ list<double> Pro::setLeftovers(char* buffer,int start) {
  * @param buffer the data
  * @return the list
  */
-list<double> Pro::setFirstList(char* buffer) {
+list<double> Pro::setFirstList(char *buffer) {
     list<double> result;
     bool quit = false;
     int count = 0;
@@ -760,10 +760,10 @@ list<double> Pro::setFirstList(char* buffer) {
     cout << this->halfNum << endl;
     char c = buffer[i];
     if (this->halfNum[0] == '.')
-        this->halfNum ='0'+ this->halfNum;
+        this->halfNum = '0' + this->halfNum;
     if (this->halfNum != "") {
         while (c != ',' && c != '\n') {
-            if (c - '0'>= 0 && c - '0' <10 || c == '.' || c == '\n') {
+            if (c - '0' >= 0 && c - '0' < 10 || c == '.' || c == '\n') {
                 this->halfNum += c;
                 c = buffer[++i];
             }
@@ -883,11 +883,11 @@ int Pro::getBufferLength() {
  */
 void Pro::setBuffer(string buff, int size) {
     this->size = size;
-    char* ch = new (nothrow) char(sizeof(char) * size);
+    char *ch = new(nothrow) char(sizeof(char) * size);
     this->buffer = ch;
     this->collector->addItem(ch);
     this->buffer = "";
-    char result[256] = { '\0' };
+    char result[256] = {'\0'};
     for (int i = 0; i < size; i++) {
         this->buffer += buff[i];
     }
@@ -917,15 +917,15 @@ unordered_map<string, string> Pro::getNamesAndDirectories() {
  */
 void Pro::addSymbolTable(string name, double d) {
 
-    this->symbolTable->insert(make_pair(name,d));
+    this->symbolTable->insert(make_pair(name, d));
 
 }
 
 /**
  * clear this list
  */
-void Pro:: clearListForExp() {
-   this->listForExp.clear();
+void Pro::clearListForExp() {
+    this->listForExp.clear();
 }
 
 /**
@@ -939,14 +939,15 @@ unordered_map<string, list<string>> Pro::getBindMap() {
 /**
  * pop from the expressions values
  */
-void Pro:: popFrontExp() {
+void Pro::popFrontExp() {
     this->listForExp.pop_front();
 }
+
 /**
  * sets the list of the expression by the given list
  * @param l the given list
  */
-void Pro:: setListForExp(list<string> l) {
+void Pro::setListForExp(list<string> l) {
     listForExp = l;
 }
 
@@ -954,7 +955,7 @@ void Pro:: setListForExp(list<string> l) {
  * returns the list of the expressions
  * @return the list
  */
-list<string> Pro:: getListForExp(){
+list<string> Pro::getListForExp() {
     return listForExp;
 }
 
@@ -964,8 +965,8 @@ list<string> Pro:: getListForExp(){
  * @param value the new value
  */
 void Pro::setVarInSymbolTable(string name, double value) {
-    for ( unordered_map<string,double>::iterator it = this->symbolTable->begin();
-    it != this->symbolTable->end() ;it++) {
+    for (unordered_map<string, double>::iterator it = this->symbolTable->begin();
+         it != this->symbolTable->end(); ++it) {
         if (it->first == name) {
             it->second = value;
         }
