@@ -7,7 +7,6 @@
 #include "ConnectServerCommand.h"
 using namespace std;
 
-
 /**
  * this function is a constractor
  * @param map  - the symbol table.
