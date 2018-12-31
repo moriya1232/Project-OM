@@ -7,7 +7,6 @@
 #include "ConnectServerCommand.h"
 using namespace std;
 
-mutex m;
 
 /**
  * this function is a constractor
