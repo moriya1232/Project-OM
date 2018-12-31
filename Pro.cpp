@@ -196,7 +196,7 @@ list<double> Pro::makeList() {
 }
 
 /**
- * this functio updates the symbol table according to the given data
+ * this function updates the symbol table according to the given data
  * from the simulator
  */
 void Pro::updateValues() {
